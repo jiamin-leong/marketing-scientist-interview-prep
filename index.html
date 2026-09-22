@@ -310,6 +310,19 @@
       </table>
     </div>
 
+    <div class="cs-note">A third test pattern — neither holdout nor add-on. Both arms get real ads; the thing being tested is the <strong>delivery methodology</strong> itself.</div>
+    <div class="sayit"><b>Say this</b>"Matching every setting except bid strategy controls for configuration, but it doesn't control for the auction — two of your own campaigns can still bid against each other for the same users unless you explicitly split the audience into disjoint pools first."</div>
+    <div class="cs-section">
+      <h2>Method-comparison test — e.g. Smart Campaign Solutions vs. manual bidding</h2>
+      <table class="cs">
+        <tr><td class="term">The naive setup</td><td>Two campaigns in the same campaign group, identical except bid strategy (campaign A = manual, campaign B = Smart Campaign Solutions). Matches every <em>setting</em> you configured — but that's necessary, not sufficient.</td></tr>
+        <tr><td class="term">The hidden confound</td><td>If both campaigns can target overlapping audiences (the default), they're both eligible to bid on the <strong>same users at the same time</strong> — your own campaigns compete against each other in the auction. Smart Campaign Solutions predicts per-impression value and bids more aggressively, so it systematically wins the shared, easy-to-convert users, leaving manual the leftover harder inventory. The resulting cost/outcome gap then reflects <strong>who won the shared auction</strong>, not which bidding methodology is better — self-competition, not a clean causal read.</td></tr>
+        <tr><td class="term">The fix</td><td>Split the eligible audience into <strong>two disjoint pools before either campaign launches</strong> (geo split, audience-exclusion lists, or a platform-level user split). Assign campaign A to pool 1 only, campaign B to pool 2 only. Only then does "only the bidding setup differs" hold at the level that matters — the populations being bid for don't overlap.</td></tr>
+        <tr><td class="term">Everything else to hold equal</td><td>Equal (or pool-size-proportional) budget per arm, identical targeting template and creative, same start time, and enough duration to cover Smart Campaign Solutions' learning phase before reading out.</td></tr>
+        <tr><td class="term">Read-out</td><td>Compare realised cost-per-outcome at equal spend, not totals. If automation wins, check audience composition/reach too — did it find genuinely higher-value users, or just out-bid for a narrower, already-easy slice at the same spend.</td></tr>
+      </table>
+    </div>
+
     <div class="cs-group">🎯 Driver analysis &amp; stats fundamentals — high priority</div>
     <div class="cs-note">Condensed — the underlying math, ready if they go one layer technical.</div>
     <div class="sayit"><b>Say this</b>"When I diagnose a campaign, I'd split drivers into two lenses — product-side (what's being shown: creative, targeting, catalog quality) and auction-side (how it's being bought: bid strategy, pacing, delivery competition) — since they point to different fixes. My output is a prioritised, evidence-backed hypothesis list I'd hand to the vertical marketing science lead, not necessarily every hypothesis tested by me end-to-end."</div>
@@ -617,6 +630,10 @@ const CARDS = [
   { cluster: "🧪 Experimentation & Causal", q: "Advertiser's ROAS dropped 20% — walk through your diagnosis.",
     a: "<p><strong>Clarify</strong>: what changed, what's the objective metric, what window. <strong>Hypothesise</strong>: auction-side (bid/budget/CPM shifts), product-side (creative fatigue, audience saturation), external (seasonality, competitor, platform/privacy change). <strong>Investigate</strong>: decompose impressions × CTR × CVR × AOV, segment by placement/audience/creative via SQL. <strong>Recommend</strong>: prioritised next steps with expected impact, validated via a test rather than assumed from correlation.</p>",
     trap: "Don't skip \"real vs. artifact\" — check for a logging/tracking change (e.g. iOS ATT shift, pixel firing issue) before hypothesising a real performance cause." },
+
+  { cluster: "🧪 Experimentation & Causal", q: "An advertiser wants to A/B test Smart Campaign Solutions against their existing manual bidding setup. They propose two campaigns in the same campaign group, identical except bid strategy. Is that a clean test?",
+    a: "<p>Not on its own. Matching every <em>setting</em> except bid strategy controls for configuration, but not for the auction — if both campaigns can target overlapping audiences, they end up bidding against <strong>each other</strong> for the same users. Smart Campaign Solutions predicts per-impression value and bids more aggressively, so it systematically wins the shared, easy-to-convert users, leaving manual the harder leftover inventory. The resulting gap then reflects who won the shared auction, not which bidding methodology is better.</p><p><strong>Fix</strong>: split the eligible audience into two disjoint pools <em>before</em> either campaign launches (geo split, audience-exclusion lists, or a platform-level user split), and assign one campaign to each pool. Only then does \"only the bidding setup differs\" hold at the level that matters.</p>",
+    trap: "\"Same campaign group, only one setting changed\" sounds like a controlled test but isn't — self-competition in the auction is a real confound your own campaigns can create against each other." },
 
   { cluster: "📈 Measurement (MMM / Lift / Attribution)", q: "MMM vs. Conversion Lift — what's the core tradeoff?",
     a: "<p><strong>MMM</strong>: aggregate, regression-based on spend-by-channel over time, privacy-resilient (no user tracking needed), but lagged and needs enough spend variation to identify channel effects. <strong>Conversion Lift</strong>: user/geo-level randomised holdout, causal and granular for one specific campaign in near real time, but needs meaningful inventory/spend to be powered and doesn't automatically generalise.</p>",
