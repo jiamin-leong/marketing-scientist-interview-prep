@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<title>Marketing Scientist Interview Flashcards — Snap</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
+  onload="renderMathInElement(document.body,{delimiters:[{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}],throwOnError:false});"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --bg: #f6f5f0;
+    --panel: #ffffff;
+    --panel-2: #eeece3;
+    --text: #1c1a14;
+    --muted: #6b6558;
+    --accent: #b45309;
+    --accent-strong: #92400e;
+    --accent-soft: #faecd2;
+    --on-accent: #1c1204;
+    --trap-bg: #fdf0e4;
+    --trap-border: #c2530a;
+    --trap-text: #7c2d12;
+    --good: #15803d;
+    --bad: #b91c1c;
+    --star: #c2410c;
+    --border: #e2ddcc;
+    --code-text: #8a4a06;
+    --shadow: 0 10px 28px rgba(28,26,20,.08);
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 24px 18px 80px; }
+  header { text-align: center; margin-bottom: 18px; }
+  h1 { font-size: 20px; margin: 0 0 4px; font-weight: 650; }
+  .sub { color: var(--muted); font-size: 13px; }
+
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
+    justify-content: center; margin: 16px 0;
+  }
+  .chip {
+    background: var(--panel); color: var(--muted); border: 1px solid var(--border);
+    padding: 6px 12px; border-radius: 20px; font-size: 12.5px; cursor: pointer;
+    user-select: none; transition: all .12s ease;
+  }
+  .chip:hover { color: var(--text); border-color: var(--accent); }
+  .chip.active { background: var(--accent-soft); color: var(--accent-strong); border-color: var(--accent); }
+
+  .btn {
+    background: var(--panel); color: var(--text); border: 1px solid var(--border);
+    padding: 7px 14px; border-radius: 8px; font-size: 13px; cursor: pointer;
+    transition: all .12s ease;
+  }
+  .btn:hover { border-color: var(--accent); }
+  .btn.primary { background: var(--accent); color: var(--on-accent); border-color: var(--accent); font-weight: 600; }
+  .btn.primary:hover { filter: brightness(1.08); }
+
+  .meta { display: flex; justify-content: space-between; align-items: center; color: var(--muted); font-size: 12.5px; margin: 8px 4px; }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--border); border-radius: 16px;
+    padding: 26px 24px; min-height: 260px; position: relative;
+    box-shadow: 0 8px 30px var(--shadow);
+  }
+  .tag {
+    display: inline-block; font-size: 11px; letter-spacing: .04em; text-transform: uppercase;
+    color: var(--accent); background: var(--accent-soft); padding: 3px 9px; border-radius: 6px; margin-bottom: 14px;
+  }
+  .q { font-size: 19px; font-weight: 600; margin: 0 0 6px; }
+  .q pre {
+    background: var(--panel-2); padding: 12px 14px; border-radius: 8px;
+    overflow-x: auto; margin: 12px 0 4px; line-height: 1.5;
+    font-size: 13px; font-weight: 400; white-space: pre;
+  }
+  .q pre code { font-family: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace; color: var(--code-text); }
+  .q .ask { display: block; font-size: 15px; font-weight: 500; color: var(--muted); margin-top: 10px; }
+  .q .hint { display: block; font-size: 13.5px; font-weight: 400; font-style: italic; color: var(--muted); margin-top: 8px; }
+  .answer { margin-top: 18px; padding-top: 18px; border-top: 1px dashed var(--border); }
+  .answer.hidden { display: none; }
+  .answer p { margin: 0 0 10px; }
+  .answer code {
+    background: var(--panel-2); padding: 1px 6px; border-radius: 5px;
+    font-family: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 13px; color: var(--code-text);
+  }
+  .answer pre {
+    background: var(--panel-2); padding: 10px 12px; border-radius: 8px;
+    overflow-x: auto; margin: 0 0 10px; line-height: 1.45;
+  }
+  .answer pre code { background: none; padding: 0; font-size: 12.5px; color: var(--code-text); }
+  .answer strong { color: var(--text); }
+  .trap {
+    background: var(--trap-bg); border-left: 3px solid var(--trap-border);
+    color: var(--trap-text); padding: 10px 14px; border-radius: 8px; font-size: 14px; margin-top: 12px;
+  }
+  .trap b { color: var(--accent-strong); }
+
+  .reveal-hint { color: var(--muted); font-size: 13px; margin-top: 22px; font-style: italic; }
+
+  .nav { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 16px; }
+  .star {
+    background: none; border: none; cursor: pointer; font-size: 22px; line-height: 1;
+    color: var(--muted); transition: transform .1s ease, color .1s ease;
+  }
+  .star:hover { transform: scale(1.15); }
+  .star.marked { color: var(--star); }
+
+  .progress-bar { height: 4px; background: var(--panel-2); border-radius: 4px; overflow: hidden; margin: 4px 0 14px; }
+  .progress-fill { height: 100%; background: var(--good); width: 0%; transition: width .2s ease; }
+
+  .kbd { font-family: "IBM Plex Mono", "SF Mono", Menlo, monospace; background: var(--panel-2); border: 1px solid var(--border); border-radius: 4px; padding: 1px 6px; font-size: 11.5px; }
+  .footer-hint { text-align: center; color: var(--muted); font-size: 12px; margin-top: 22px; }
+  .empty { text-align: center; color: var(--muted); padding: 60px 20px; }
+
+  .viewtoggle { display: flex; gap: 8px; justify-content: center; margin: 4px 0 20px; }
+  .viewtoggle .tab {
+    background: var(--panel); border: 1px solid var(--border); color: var(--muted);
+    padding: 8px 20px; border-radius: 10px; cursor: pointer; font-size: 13.5px; font-weight: 600;
+    transition: all .12s ease;
+  }
+  .viewtoggle .tab:hover { color: var(--text); }
+  .viewtoggle .tab.active { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+
+  .cs-section { margin: 24px 0; }
+  .cs-section h2 { font-size: 13px; text-transform: uppercase; letter-spacing: .05em; color: var(--accent); margin: 0 0 10px; }
+  table.cs { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+  table.cs td { padding: 11px 14px; border-top: 1px solid var(--border); vertical-align: top; font-size: 14px; }
+  table.cs tr:first-child td { border-top: none; }
+  table.cs .term { font-weight: 700; color: var(--text); white-space: nowrap; width: 118px; }
+  table.cs code { background: var(--panel-2); padding: 1px 6px; border-radius: 5px; font-family: "IBM Plex Mono", "SF Mono", Menlo, Consolas, monospace; font-size: 12.5px; color: var(--code-text); }
+  table.cs .hint { color: var(--muted); }
+  table.cs.scan .term { width: 210px; white-space: nowrap; }
+  table.cs .dir { display: block; margin-top: 5px; color: var(--bad); font-weight: 600; }
+  table.cs .fix { display: block; margin-top: 3px; color: var(--muted); }
+  table.cs .fix b { color: var(--accent-strong); font-weight: 700; }
+  table.cs .hd td { background: var(--panel-2); font-size: 11px; font-weight: 800; letter-spacing: .07em;
+    text-transform: uppercase; color: var(--muted); padding: 7px 14px; white-space: nowrap; }
+  /* Display formulas: own line, left-aligned, scrollable on narrow screens */
+  .fml { display: block; background: var(--panel-2); border-left: 2px solid var(--accent);
+         border-radius: 0 6px 6px 0; padding: 4px 12px; margin: 9px 0; overflow-x: auto; }
+  .fml + .fml { margin-top: -3px; }
+  .katex-display { margin: 6px 0; text-align: left; }
+  .katex-display > .katex { text-align: left; display: inline-block; white-space: nowrap; }
+  .fml .katex-display { margin: 4px 0; }
+  .fml-label { display: block; font-size: 12px; color: var(--muted); margin-bottom: -2px; }
+  .wex { display: block; background: rgba(21,128,61,.08); border-left: 2px solid var(--good);
+         border-radius: 0 6px 6px 0; padding: 7px 12px; margin: 10px 0; font-size: 13.5px; color: var(--text); }
+  .wex b { color: var(--good); font-weight: 600; }
+  .wex-title { display: block; font-size: 11px; text-transform: uppercase; letter-spacing: .06em;
+               color: var(--good); font-weight: 800; margin-bottom: 4px; }
+  .wex .step { display: block; margin: 2px 0; }
+  .cmp-wrap { overflow-x: auto; margin: 4px 0 14px; }
+  table.cmp { border-collapse: collapse; background: var(--panel); border: 1px solid var(--border);
+              border-radius: 12px; overflow: hidden; font-size: 13px; min-width: 640px; width: 100%; }
+  table.cmp th { text-align: left; padding: 9px 11px; background: var(--panel-2); color: var(--text);
+                 font-size: 11.5px; font-weight: 800; letter-spacing: .03em; border-bottom: 1px solid var(--border); }
+  table.cmp td { padding: 9px 11px; border-top: 1px solid var(--border); vertical-align: top; }
+  table.cmp td:first-child { font-weight: 700; color: var(--accent-strong); white-space: nowrap; }
+  table.cmp .err { display: block; color: var(--bad); font-weight: 600; font-size: 12px; margin-top: 4px; }
+  table.cmp .ok { display: block; color: var(--good); font-size: 12px; margin-top: 4px; }
+
+  /* ---- collapsible cheatsheet ---- */
+  .cs-toolbar { position: sticky; top: 0; z-index: 20; background: var(--bg);
+                padding: 10px 0 10px; margin: 0 0 14px; border-bottom: 1px solid var(--border); }
+  .cs-searchrow { display: flex; gap: 8px; align-items: center; }
+  .cs-search { flex: 1; background: var(--panel); border: 1px solid var(--border); color: var(--text);
+               border-radius: 9px; padding: 9px 12px; font-size: 14px; font-family: inherit; }
+  .cs-search:focus { outline: none; border-color: var(--accent); }
+  .cs-btn { background: var(--panel); border: 1px solid var(--border); color: var(--muted);
+            border-radius: 9px; padding: 9px 11px; font-size: 12px; cursor: pointer; white-space: nowrap; font-family: inherit; }
+  .cs-btn:hover { color: var(--text); border-color: var(--accent); }
+  .cs-nav { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 9px; }
+  .cs-chip { background: var(--panel); border: 1px solid var(--border); color: var(--muted);
+             border-radius: 999px; padding: 5px 11px; font-size: 12px; cursor: pointer; font-family: inherit; }
+  .cs-chip:hover, .cs-chip.on { background: var(--accent); color: var(--on-accent); border-color: var(--accent); }
+  html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+  .cs-hits { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  pre.ctree { background: var(--panel); border: 1px solid var(--border); border-radius: 10px;
+              padding: 12px 14px; margin: 6px 0 15px; overflow-x: auto; font-size: 12px;
+              line-height: 1.5; color: var(--text); white-space: pre;
+              font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+  .cs-note { font-size: 12.5px; color: var(--muted); margin: 10px 4px 2px; line-height: 1.5; }
+
+  .cs-block { margin: 0 0 10px; scroll-margin-top: 108px; }
+  .cs-block > .cs-group { margin: 0; display: flex; align-items: center; gap: 10px; cursor: pointer;
+                          border-bottom: 2px solid var(--border); padding: 11px 4px; user-select: none; }
+  .cs-block.open > .cs-group { border-bottom-color: var(--accent); }
+  .cs-block > .cs-group:hover { color: var(--text); }
+  .cs-group .chev { font-size: 11px; color: var(--muted); transition: transform .15s ease; margin-left: auto; }
+  .cs-block.open .chev { transform: rotate(90deg); }
+  .cs-group .cnt { font-size: 11px; font-weight: 600; color: var(--muted); background: var(--panel-2);
+                   border-radius: 999px; padding: 2px 8px; letter-spacing: 0; text-transform: none; }
+  .cs-body { display: none; padding-top: 4px; }
+  .cs-block.open > .cs-body { display: block; }
+  .cs-block > .cs-body > .cs-section:first-child { margin-top: 14px; }
+
+  .to-top { position: fixed; right: 16px; bottom: 16px; z-index: 30; background: var(--panel);
+            border: 1px solid var(--border); color: var(--muted); border-radius: 999px;
+            padding: 9px 13px; font-size: 13px; cursor: pointer; display: none; font-family: inherit; }
+  .to-top.show { display: block; }
+  .to-top:hover { color: var(--text); border-color: var(--accent); }
+  .cs-group { font-size: 13px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--accent-strong); border-bottom: 2px solid var(--accent); padding-bottom: 6px; margin: 36px 0 8px; }
+  .ptable-wrap { overflow: auto; -webkit-overflow-scrolling: touch; margin: 4px 0 10px; border: 1px solid var(--border); border-radius: 12px; max-height: 80vh; }
+  .ptable-wrap.full { max-height: none; }
+  .ptable-wrap.full table.ptable th { position: static; }
+  table.ptable { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 12px; min-width: 680px; background: var(--panel); }
+  table.ptable th { text-align: left; color: var(--accent); font-size: 10.5px; text-transform: uppercase; letter-spacing: .03em; padding: 8px 10px; border-bottom: 1px solid var(--border); vertical-align: top; white-space: nowrap; position: sticky; top: 0; background: var(--panel-2); z-index: 2; }
+  table.ptable td { padding: 9px 10px; border-top: 1px solid var(--border); vertical-align: top; }
+  table.ptable td.prod, table.ptable th:first-child { position: sticky; left: 0; z-index: 1; background: var(--panel-2); box-shadow: 1px 0 0 var(--border); }
+  table.ptable th:first-child { z-index: 3; }
+  table.ptable td.prod { font-weight: 700; color: var(--text); white-space: normal; overflow-wrap: break-word;
+                         width: 1%; min-width: 110px; max-width: 160px; }
+  table.ptable td.ns { color: var(--accent-strong); }
+  table.ptable ol { margin: 0; padding-left: 15px; }
+  table.ptable li { margin-bottom: 2px; }
+  .sayit { background: var(--accent-soft); border-left: 3px solid var(--accent); border-radius: 0 8px 8px 0;
+           padding: 9px 12px; margin: 11px 0 5px; font-size: 13px; line-height: 1.6; }
+  .sayit b { color: var(--accent); font-size: 10px; letter-spacing: .06em; text-transform: uppercase;
+           display: block; margin-bottom: 4px; font-weight: 700; }
+  .probe { font-size: 12px; color: var(--muted); margin: 0 0 13px 3px; line-height: 1.55; }
+  .tri { display: grid; gap: 7px; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); margin: 10px 0 4px; }
+  .tri > div { background: var(--panel); border: 1px solid var(--border); border-radius: 9px; padding: 9px 11px; font-size: 13px; line-height: 1.55; }
+  .tri .n { color: var(--accent); font-weight: 700; margin-right: 5px; }
+  table.ptable td.detail { background: var(--bg); border-top: 1px dashed var(--border);
+                           padding: 13px 14px 15px; line-height: 1.6; font-size: 12px; }
+  table.ptable td.detail p { font-size: 12px; }
+  table.ptable td.detail .detail-hd { font-size: 10.5px; text-transform: uppercase; letter-spacing: .04em;
+                           color: var(--accent); margin-bottom: 9px; font-weight: 700; }
+  table.ptable td.detail .detail-grid { display: grid; gap: 9px 26px;
+                           grid-template-columns: repeat(auto-fit, minmax(330px, 1fr)); }
+  table.ptable td.detail .detail-grid > p { margin: 0; }
+  @media (max-width: 640px) {
+    table.ptable td.detail .detail-grid { grid-template-columns: 1fr; gap: 11px; }
+    table.ptable td.detail { padding: 12px 11px 14px; }
+    .tri { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>Marketing Scientist Interview Prep</h1>
+    <div class="sub">Measurement, Experimentation &amp; Causal Analytics for China Performance Ads (Snap) · say it out loud, then reveal</div>
+  </header>
+
+  <div class="viewtoggle">
+    <button class="tab" id="tabCheat">📋 Cheatsheet</button>
+    <button class="tab" id="tabProducts">📱 Products</button>
+    <button class="tab" id="tabGlossary">🀄 Mandarin</button>
+    <button class="tab" id="tabCards">🎴 Flashcards</button>
+  </div>
+
+  <div id="cheatsheetView">
+
+    <div class="cs-group">🎯 Tonight's priority</div>
+    <div class="cs-note">Weighted against the JD's explicit asks + what a technical screening round from an ex-Meta HM most likely tests. Reallocate remaining prep time accordingly.</div>
+    <div class="tri">
+      <div><span class="n">1</span><strong>Experimentation &amp; incrementality — top priority.</strong> The only technical theme the JD repeats ("causal analytics," "experimental design... sig testing, power calculation, sample design"), and where your Meta background gives you real depth. Expect a scenario, not a definitions quiz.</div>
+      <div><span class="n">2</span><strong>Driver analysis — high priority.</strong> Explicitly named technique (regression, random forest). Likely tested conceptually, not as a hands-on build.</div>
+      <div><span class="n">3</span><strong>Case study &amp; business framing — high priority.</strong> This is an IC-partner role reporting to a now-manager — they're listening for whether you close with a decision, not just a finding.</div>
+      <div><span class="n">4</span><strong>SQL — short refresher only.</strong> Named as a minimum qualification, so it's likely screened, but keep this section brief — a quick pattern refresh, not deep practice.</div>
+      <div><span class="n">5</span><strong>MMM / measurement stack — background depth.</strong> Not named explicitly in the JD (only "econometrics modeling," a broader bucket). Know it if it comes up; don't over-invest tonight.</div>
+      <div><span class="n">6</span><strong>China &amp; Sales partnership — background depth.</strong> A framing/fit signal, not something technically quizzed.</div>
+    </div>
+
+    <div class="cs-group">⭐ The only 10 things to memorise</div>
+    <div class="cs-note">Refreshed against tonight's priority order. Learn these ten sentences cold — everything below is recognition-only.</div>
+    <div class="tri">
+      <div><span class="n">1</span><strong>Ask what decision the test informs</strong> before naming a metric or a method. "Is advertising working?" and "is this add-on worth it?" are different questions with different controls.</div>
+      <div><span class="n">2</span><strong>The control group's definition changes with the question.</strong> Holdout (suppressed from the campaign) answers "does advertising work." BAU-only vs. BAU+add-on answers "is the add-on worth it."</div>
+      <div><span class="n">3</span><strong>Ghost / PSA ads preserve budget + auction parity</strong> for a holdout test — the confound isn't just attention, it's that an unspent control budget changes auction dynamics for treatment too.</div>
+      <div><span class="n">4</span><strong>Add-on budget must be truly incremental</strong>, not carved from the existing BAU pool — otherwise you've reallocated spend, not added it, and BAU delivery differs across arms.</div>
+      <div><span class="n">5</span><strong>Report incremental ROAS</strong> = (treatment outcome − control outcome) ÷ incremental spend. Raw totals are trivially higher in treatment when you spent more — that's not informative.</div>
+      <div><span class="n">6</span><strong>Never reallocate budget across arms mid-flight.</strong> That breaks randomisation. Reallocation is the decision you make <em>after</em> the read-out, using its result.</div>
+      <div><span class="n">7</span><strong>Split driver analysis into product-side vs. auction-side before naming a model.</strong> They point to different fixes — and watch for <strong>endogeneity</strong> on the auction side: a bid can rise <em>because</em> performance is already good, not the other way round.</div>
+      <div><span class="n">8</span><strong>Regression for the Sales narrative; random forest/GBM for ranked drivers.</strong> Always name the tradeoff (interpretability vs. handling non-linearity) and caveat correlation vs. causation.</div>
+      <div><span class="n">9</span><strong>Every case: Story → Goal → Solution → Measurement proof → Results → Recommendation.</strong> Name real Snap products (Smart Campaign Solutions, Snap Pixel, Conversions API, Conversion Lift, Dynamic Product Ads, Unified Attribution) — not Meta's.</div>
+      <div><span class="n">10</span><strong>Two-tier China framing.</strong> Scale/self-serve for the broad book ("drive scaled adoption"); a structured <strong>learning agenda</strong> for top advertisers. Either way, your driver-analysis output feeds the vertical marketing science lead's hypothesis queue — you're not the unilateral decision-maker for every vertical.</div>
+    </div>
+    <div class="probe"><strong>Two habits that carry every answer:</strong> open by naming the exact decision a test/analysis informs before naming a method · close with a recommendation framed as incremental ROI, not just a lift percentage.</div>
+
+    <div class="cs-group">🧪 Experimentation &amp; incrementality — top priority</div>
+    <div class="cs-note">The core technical seam under any case — how you know a lift number is real.</div>
+    <div class="sayit"><b>Say this</b>"The control group's definition depends on the question. If we're asking whether advertising works at all, control is a holdout suppressed from the campaign — and we protect that with ghost ads so budget and auction dynamics stay equal. If we're asking whether a new format is worth the extra spend, control is BAU-only and treatment is BAU plus the add-on — there the asymmetry is the point, so I'd evaluate it on incremental ROAS, not raw outcome."</div>
+    <div class="probe"><strong>If probed →</strong> randomisation unit (user vs. geo) · why not simply omit ads to control (auction/attention confound) · why not reallocate mid-test (breaks randomisation) · what makes a lift number defensible to a skeptical advertiser.</div>
+    <div class="cs-section">
+      <h2>Design decisions, one at a time</h2>
+      <table class="cs">
+        <tr><td class="term">Randomisation unit</td><td>Default <strong>user-level</strong> (hashed device/user ID) when the platform controls per-user delivery. Fall back to <strong>geo-level</strong> when you can't isolate at the user level — new channel entirely, offline/halo effects, or risk of <strong>spillover</strong> between a treated and a control user (social/viral products).</td></tr>
+        <tr><td class="term">Ghost / PSA ads</td><td>Control still gets served a neutral placeholder ad instead of nothing. Preserves <strong>attention parity</strong> (both groups had a slot filled) AND <strong>budget/auction parity</strong> (control still spends, still competes) — so any measured difference is attributable to ad <em>content</em>, not delivery mechanics.</td></tr>
+        <tr><td class="term">Holdout test (ads vs. no ads)</td><td>Answers: does advertising drive any incremental effect at all. Budget symmetry across arms is the thing you <strong>protect</strong>.</td></tr>
+        <tr><td class="term">Add-on test (BAU vs. BAU+format)</td><td>Answers: is this specific new element worth its incremental spend. Budget asymmetry is <strong>expected</strong> — what you protect instead is that the add-on's budget is genuinely incremental, not reallocated from BAU, and that its impressions are additive reach rather than <strong>cannibalising</strong> BAU delivery on the same users.</td></tr>
+        <tr><td class="term">Mid-flight budget shifts</td><td><strong>Never</strong> reallocate between arms while a test is running — an adaptive/bandit-style shift breaks random assignment and invalidates the causal read. Smart/auto-bidding that only "sees" conversions in treatment will also self-select toward easy converters — freeze targeting + bid strategy identically across arms for the test duration.</td></tr>
+        <tr><td class="term">Power / MDE</td><td>Minimum Detectable Effect shrinks with more users, longer duration, and lower outcome variance. Sanity-check on the spot: bigger baseline variance (e.g. high-value whale spenders) needs a larger sample or a capped/winsorised metric to stay powered.</td></tr>
+        <tr><td class="term">Underpowered vs. true null</td><td>A flat result could mean "no effect" or "not enough data to tell." Always check the CI/MDE before declaring a null — especially when it contradicts a plausible mechanism.</td></tr>
+        <tr><td class="term">Learning agenda</td><td>A <strong>structured, prioritised testing roadmap</strong> for a top advertiser — tests sequenced so each one builds on the last (e.g. frequency cap → creative refresh → bid strategy), rather than ad hoc one-off tests. JD-named term, scoped specifically to <strong>top advertisers</strong> — distinct from the "scaled/self-serve" framing that applies to the broader book. Programmatic here means <em>systematic and repeatable</em>, not automated.</td></tr>
+      </table>
+    </div>
+
+    <div class="cs-group">🎯 Driver analysis &amp; stats fundamentals — high priority</div>
+    <div class="cs-note">Condensed — the underlying math, ready if they go one layer technical.</div>
+    <div class="sayit"><b>Say this</b>"When I diagnose a campaign, I'd split drivers into two lenses — product-side (what's being shown: creative, targeting, catalog quality) and auction-side (how it's being bought: bid strategy, pacing, delivery competition) — since they point to different fixes. My output is a prioritised, evidence-backed hypothesis list I'd hand to the vertical marketing science lead, not necessarily every hypothesis tested by me end-to-end."</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">Product-side drivers</td><td>Creative/format quality, targeting/audience mix, catalog data quality (Dynamic Product Ads), frequency/fatigue, placement mix — <strong>what's being shown, to whom</strong>.</td></tr>
+        <tr><td class="term">Auction-side drivers</td><td>Bid strategy, budget pacing, delivery/competition density, CPM trends, Smart Campaign Solutions optimisation settings — <strong>how it's being bought</strong>.</td></tr>
+        <tr><td class="term">Feeding vertical leads</td><td>The JD frames this role as producing inputs for <strong>vertical marketing science leaders</strong> (gaming, e-commerce) to hypothesis-test — this role is horizontal/China-wide, verticals own deeper strategy. Frame driver-analysis output as a prioritised hypothesis list, not a unilateral decision.</td></tr>
+        <tr><td class="term">Regression vs. random forest</td><td><strong>Regression</strong> when you need interpretable, signed coefficients to build a Sales narrative ("+1pt CTR associates with +X ROAS"). <strong>Random forest / GBM</strong> when you want ranked feature importance and can tolerate less interpretability, or the relationship is non-linear / has interactions. Both are <strong>associational</strong> — flag that top drivers should be validated with a test, not treated as causal on sight.</td></tr>
+        <tr><td class="term">Multicollinearity</td><td>Correlated predictors (e.g. impressions and reach) make individual coefficients unstable/hard to interpret even if the overall model fits well. Check VIF, or just reason about which channels move together.</td></tr>
+        <tr><td class="term">p-value / CI / power (recap)</td><td>p-value = P(data this extreme | null true). 95% CI excludes 0 ⇔ significant at α=0.05. Power = P(detect a real effect) = 1−β, driven up by more n, bigger true effect, lower variance, higher α.</td></tr>
+        <tr><td class="term">CLT on skewed ad metrics</td><td>Revenue/user or ROAS per campaign is heavily skewed (zero-inflated + a long tail of whales), but you're doing inference on the <strong>mean</strong>, so CLT still makes z/t-tests valid at scale. The real risk is <strong>power</strong> (huge variance → large MDE) and a single whale flipping the result — fix with capping/winsorising, decomposing into rate × value-given-conversion, or CUPED on pre-period spend.</td></tr>
+        <tr><td class="term">Optional stopping / peeking</td><td>Checking a live test and stopping the moment p&lt;0.05 inflates the true false-positive rate — predefine sample size/duration, or use sequential testing if you must monitor live.</td></tr>
+      </table>
+    </div>
+    <div class="probe"><strong>Regression diagnostics — the natural follow-up once you've named a driver.</strong> Don't wait to be asked; volunteering one of these on a real regression answer is a strong signal.</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">R² / adjusted R²</td><td>Share of variance explained. <strong>Not the goal</strong> — a high R² on the same data you fit on says nothing about generalisation. Adjusted R² penalises adding useless predictors; prefer it when comparing models with different predictor counts.</td></tr>
+        <tr><td class="term">Residual diagnostics</td><td>Plot residuals vs. fitted values — a pattern (fan shape, curve) signals <strong>heteroscedasticity</strong> or a missed non-linearity, both of which bias your standard errors even if the coefficient estimate itself is fine.</td></tr>
+        <tr><td class="term">Coefficient significance</td><td>A "driver" should clear its own p-value/CI, not just have the right sign — check each coefficient's SE, not just the model's overall R².</td></tr>
+        <tr><td class="term">Outliers / influential points</td><td>A handful of whale advertisers or campaigns can dominate a regression — check leverage / Cook's distance, not just eyeball the scatterplot. Ties back to the CLT/whale problem above.</td></tr>
+        <tr><td class="term">⚠️ Endogeneity / reverse causality</td><td>The sharpest trap for <strong>auction-side drivers specifically</strong>: bid amount often rises <em>because</em> a campaign is already performing well (advertiser/algorithm reacting to success), not the other way round. Regressing performance on bid without accounting for this direction gets the causal story backwards. Flag it, and reach for the same toolkit as the experimentation section — a randomised bid-strategy test, not another regression — to actually resolve it.</td></tr>
+        <tr><td class="term">Omitted variable bias</td><td>A missing confounder (seasonality, a competitor's campaign, a platform-wide auction shift) that affects both the driver and the outcome will bias the coefficient on the driver you did include. Name a plausible omitted variable before trusting a coefficient.</td></tr>
+      </table>
+    </div>
+
+    <div class="cs-note">Example hypotheses — concrete enough to name live, structured by the product-side/auction-side split above. Format: Hypothesis → what you'd check → vertical note where relevant.</div>
+    <div class="cs-section">
+      <h2>Product-side hypotheses (what's being shown)</h2>
+      <table class="cs">
+        <tr><td class="term">Creative fatigue</td><td>CTR decays as the same users see the same ad repeatedly. <strong>Check:</strong> frequency vs. CTR-decay curve.</td></tr>
+        <tr><td class="term">Format mismatch</td><td>A static image underperforming vs. AR Lens/video for an awareness-stage objective, or vice versa for a direct-response objective. <strong>Check:</strong> format-level CTR/IPM cut by campaign objective.</td></tr>
+        <tr><td class="term">Catalog data quality</td><td>Stale pricing or out-of-stock items in Dynamic Product Ads. <strong>Check:</strong> feed error/out-of-stock rate vs. conversion rate. <span class="hint">E-commerce-specific.</span></td></tr>
+        <tr><td class="term">Targeting too broad or too narrow</td><td>Lookalike seed too small, or targeting overlapping with the existing installed base (self-cannibalisation). <strong>Check:</strong> audience overlap with the current user base, lookalike seed size. <span class="hint">Self-cannibalisation is especially relevant for gaming UA.</span></td></tr>
+        <tr><td class="term">Tracking/measurement artifact, not a real product problem</td><td>Snap Pixel/SDK event misfiring reads as "poor performance" when it's actually a broken conversion signal. <strong>Check:</strong> event-fire rate vs. expected volume — rule this out first, it's the "real vs. artifact" check.</td></tr>
+        <tr><td class="term">Landing/store-listing drop-off</td><td>Click-to-install gap separate from ad quality. <strong>Check:</strong> click-to-store-page rate vs. store-page-to-install rate, to isolate ad vs. app-store-listing. <span class="hint">Gaming-specific.</span></td></tr>
+      </table>
+      <h2 style="margin-top:20px">Auction-side hypotheses (how it's being bought)</h2>
+      <table class="cs">
+        <tr><td class="term">Bid strategy misaligned with the true objective</td><td>Optimising for install when LTV is the real goal. <strong>Check:</strong> optimisation event vs. stated business objective.</td></tr>
+        <tr><td class="term">Budget pacing frontloading</td><td>Budget exhausted early in the day, missing high-value auction windows later. <strong>Check:</strong> hourly spend-pacing curve vs. conversion-rate-by-hour.</td></tr>
+        <tr><td class="term">Auction competition density spike</td><td>CPMs rising because of a seasonal/competitive surge (e.g. other advertisers ramping for a shopping festival), not anything the advertiser did. <strong>Check:</strong> CPM trend vs. category-wide spend, not just the campaign's own numbers.</td></tr>
+        <tr><td class="term">Smart Campaign Solutions in learning phase</td><td>Delivery/CPA unstable early on. <strong>Check:</strong> days-since-launch and conversion volume vs. the platform's stabilisation threshold.</td></tr>
+        <tr><td class="term">Bid cap too conservative</td><td>Losing high-value auctions because the cap is set below true value. <strong>Check:</strong> win-rate vs. bid cap, lost-auction volume.</td></tr>
+        <tr><td class="term">Endogeneity</td><td>Bid raised <em>because</em> performance was already good, not the cause of it. <strong>Check:</strong> whether the bid change precedes or follows the performance shift in the time series.</td></tr>
+      </table>
+    </div>
+
+    <div class="cs-group">💼 Case study structure &amp; client narrative — high priority</div>
+    <div class="cs-note">Real Snap case studies (SHEIN, VOGACLOSET, Mohegan Sun) follow this arc — use it verbatim when handed a scenario.</div>
+    <div class="sayit"><b>Say this</b>"I'd structure it as story, goal, solution, then proof — what's the advertiser's business and where are they today, what specific outcome are we optimising (not just 'more ROAS' — installs, D7-adjusted LTV, revenue), which named Snap products address that goal, how I'd prove any lift is real, and then report results as incremental ROAS with a clear next-step recommendation."</div>
+    <div class="probe"><strong>If probed →</strong> why that metric and not another · what would falsify the recommendation · how the read-out would differ for a gaming vs. e-commerce advertiser.</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">1. Story</td><td>Advertiser's business model, vertical (e-commerce / gaming), and where they are today — new to Snap, scaling an existing channel, or expanding into new markets.</td></tr>
+        <tr><td class="term">2. Goal</td><td>Pin the objective explicitly: install volume, ROAS, D7-retention-adjusted LTV, revenue. Common trap: solving the wrong objective because it wasn't confirmed up front.</td></tr>
+        <tr><td class="term">3. Solution</td><td>Name the actual Snap product mix: Smart Campaign Solutions (automated bidding), Dynamic Product Ads (e-commerce catalog), AR Lens / Sponsored Snappables (awareness), Story/Collection Ads (creative format).</td></tr>
+        <tr><td class="term">4. Measurement proof</td><td>Your wedge as a scientist — Conversion Lift design (holdout or add-on, per the question), MDE/duration, how you'd rule out the confounds above.</td></tr>
+        <tr><td class="term">5. Results</td><td>Report as % lift AND incremental ROAS / cost-per-incremental-outcome, echoing the register of real case studies (e.g. "20% ROAS lift, 50% lower CPA" — SHEIN; "+58% installs, +19% purchases, +12% revenue via Unified Attribution" — VOGACLOSET).</td></tr>
+        <tr><td class="term">6. Recommendation</td><td>What to scale next, and the threshold/condition that would change the recommendation.</td></tr>
+      </table>
+    </div>
+
+    <div class="cs-group">🗄️ SQL quick-hits — short refresher</div>
+    <div class="cs-note">JD explicitly names SQL across large datasets — expect a live or take-home query on campaign/auction data.</div>
+    <div class="cs-section">
+      <h2>Ad-data patterns</h2>
+      <table class="cs">
+        <tr><td class="term">CTR / CVR / ROAS by segment</td><td><code>SUM(clicks)*1.0/NULLIF(SUM(impressions),0)</code> — always cast to float and guard the denominator with <code>NULLIF</code>, never raw integer division.</td></tr>
+        <tr><td class="term">Week-over-week / period-over-period</td><td><code>LAG(metric) OVER (PARTITION BY campaign_id ORDER BY week)</code> — don't self-join when a window function does it in one pass.</td></tr>
+        <tr><td class="term">Top-N per advertiser/campaign</td><td><code>RANK() / ROW_NUMBER() OVER (PARTITION BY advertiser_id ORDER BY spend DESC)</code>.</td></tr>
+        <tr><td class="term">⚠️ LEFT JOIN + WHERE</td><td>A filter on the <strong>right</strong> table in <code>WHERE</code> silently turns a <code>LEFT JOIN</code> into an <code>INNER JOIN</code> — put the filter in the <strong>ON</strong> clause.</td></tr>
+        <tr><td class="term">Incremental outcome</td><td>Treatment vs. control aggregates joined on test arm, then <code>(treatment_outcome - control_outcome) / incremental_spend</code> computed in the final SELECT — say this formula out loud if asked to write the lift query.</td></tr>
+      </table>
+    </div>
+    <div class="footer-hint">Quick reference · switch to 🎴 Flashcards to self-quiz</div>
+
+    <div class="cs-group">📈 Measurement stack — MMM, lift, brand lift, attribution — background</div>
+    <div class="cs-note">Know when each tool answers the question, not just its definition. Four tools, not three — brand lift is the upper-funnel counterpart to Conversion Lift, not a variant of it.</div>
+    <div class="sayit"><b>Say this</b>"MMM, Conversion Lift, Brand Lift, and attribution answer different questions on different parts of the funnel. MMM gives a privacy-resilient, aggregate read across channels with some lag. Conversion Lift and Brand Lift share the same exposed-vs-control causal design — the difference is the outcome: Conversion Lift measures a logged behavioural event, Brand Lift measures a survey response on awareness, recall, or intent. A mature program uses all of them: MMM for cross-channel budget allocation, lift tests to validate the MMM's elasticities, and Brand Lift specifically for upper-funnel/awareness spend where there's no conversion event to measure yet."</div>
+    <div class="probe"><strong>If probed →</strong> Brand Lift's outcome is a survey response, not a logged event, so it needs a research-partner-style survey pipeline (exposed users and a matched control get polled, typically via a third-party panel) rather than pixel/SDK tracking · response rates are low, so the test needs a bigger reach/longer duration to power than a typical Conversion Lift · standard metrics: aided/unaided ad recall, brand awareness, favourability, message association, purchase intent.</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">MMM (media mix modeling)</td><td>Regresses aggregate outcome (revenue/conversions) on aggregate spend by channel over time. Uses <strong>adstock</strong> (carryover — an impression's effect decays over following days/weeks, not instantly) and <strong>saturation curves</strong> (diminishing returns as spend in a channel rises). Privacy-resilient (no user-level tracking needed), but lagged and needs enough historical variation in spend to identify channel effects — collinear budgets (channels always moving together) make coefficients unstable.</td></tr>
+        <tr><td class="term">Conversion Lift (incrementality)</td><td>User- or geo-level randomised holdout, platform-run. Gives a causal, granular answer for one campaign on a <strong>behavioural</strong> outcome (purchase, install, sign-up), but needs meaningful spend/inventory to be powered, and doesn't automatically generalise to other campaigns or time periods.</td></tr>
+        <tr><td class="term">Brand Lift surveys</td><td>Same exposed-vs-control randomised design as Conversion Lift, but the outcome is a <strong>survey response</strong> from a matched exposed and control panel, not a logged conversion — measures aided/unaided ad recall, brand awareness, favourability, message association, purchase intent. Used for upper-funnel/awareness campaigns (AR Lens, video, Sponsored Snappables) where there's no conversion event yet to causally test on. Needs bigger reach and longer duration to power, since survey response rates are far lower than conversion rates, and typically runs through a third-party research/panel partner rather than pixel-based tracking.</td></tr>
+        <tr><td class="term">MTA / Unified Attribution</td><td>Rules-based or algorithmic credit assignment across touchpoints (last-click, linear, data-driven). Granular and real-time, but <strong>breaks under privacy changes</strong> (iOS ATT, cookie deprecation) since it depends on user-level tracking, and it's correlational, not causal — it describes the path to conversion, not what would've happened without the ad.</td></tr>
+        <tr><td class="term">Multi-study meta-analysis</td><td>Pool effect sizes across many advertiser-level lift tests (e.g. by vertical — gaming, e-commerce) to build a generalised elasticity / diminishing-returns curve. Method: hierarchical/mixed-effects model pooling studies, weighting by each test's power/precision, checking for effect heterogeneity before pooling rather than assuming one true effect.</td></tr>
+        <tr><td class="term">Which to lead with</td><td>Conversion Lift is your credibility instrument for performance/lower-funnel spend. Brand Lift is the equivalent for awareness/upper-funnel spend — same logic, different outcome variable. MMM is your scaling instrument for budget allocation across many advertisers/channels at once. Frame it as "the outcome variable changes with the funnel stage," not as picking one tool.</td></tr>
+      </table>
+    </div>
+
+    <div class="cs-group">🇨🇳 China market &amp; Sales partnership — background</div>
+    <div class="cs-note">This is an IC role embedded with Sales, not a modeling role — the "partner" framing matters.</div>
+    <div class="sayit"><b>Say this</b>"Measurement credibility with performance advertisers is won through fast, trustworthy, repeatable results — not a bespoke deep-dive per account. I'd build a scaled, self-serve learning-agenda framework that Sales can run with across the China book, and reserve custom analysis for the handful of top advertisers where it earns its cost."</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">"Drive scaled adoption"</td><td>The JD's core ask — a repeatable testing/learning-agenda framework advertisers self-serve into, not one-off bespoke analyses per advertiser.</td></tr>
+        <tr><td class="term">Gap: client-facing pitch decks</td><td>Reframe honestly — influence experience is upward/cross-functional (Product, Eng, exec go/no-go), which transfers as "structuring insight for a skeptical, non-technical audience." Don't overclaim Sales-deck experience not actually held.</td></tr>
+        <tr><td class="term">Gap: MMM / brand lift depth</td><td>Claim fluency in when to use it and its limits (a "partner" role needs this more than deep modeling chops), not hands-on MMM-building — be precise about which you have.</td></tr>
+        <tr><td class="term">Leveraging real Meta experience</td><td>Speak from firsthand Meta Ads Monetisation DS experience — Conversion Lift mechanics, ghost ads, incrementality — translated into Snap's named products, not Meta's terminology (Advantage+ → Smart Campaign Solutions, Partnership Ads → creator/AR formats).</td></tr>
+        <tr><td class="term">Fluency requirement</td><td>Mandarin fluency is a minimum qualification — be ready to confirm comfort operating bilingually with Sales/advertisers, not just as a nice-to-have.</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <div id="productsView">
+    <div class="cs-group">⭐ Snap product vocabulary — say these, not Meta's</div>
+    <div class="cs-note">An ex-Meta HM will notice if you reach for Advantage+ or Partnership Ads in a Snap answer. Use these instead.</div>
+    <div class="tri">
+      <div><span class="n">1</span><strong>Smart Campaign Solutions</strong> — Snap's automated/AI-driven optimisation suite (Smart Ads, Smart Bidding, Smart Budget). Snap's answer to Meta's Advantage+ and Google's Performance Max.</div>
+      <div><span class="n">2</span><strong>Snap Pixel</strong> — client-side JavaScript conversion tracking on advertiser websites.</div>
+      <div><span class="n">3</span><strong>Conversions API</strong> — server-side event tracking, more resilient to browser/privacy restrictions than pixel alone.</div>
+      <div><span class="n">4</span><strong>Conversion Lift</strong> — Snap's causal/incremental measurement product; the platform-run holdout test.</div>
+      <div><span class="n">5</span><strong>Dynamic Product Ads</strong> — catalog/feed-driven ads for e-commerce, optimisable to Pixel Purchase events.</div>
+      <div><span class="n">6</span><strong>Unified Attribution</strong> — Snap's cross-channel/cross-touchpoint measurement view.</div>
+      <div><span class="n">7</span><strong>Story Ads / Collection Ads</strong> — core creative formats; Collection Ads pair well with Dynamic Product Ads for e-commerce.</div>
+      <div><span class="n">8</span><strong>AR Lenses / Sponsored Snappables</strong> — Snap's differentiated AR ad formats, typically an awareness/engagement lever rather than direct-response.</div>
+    </div>
+    <div class="probe"><strong>If probed on real numbers →</strong> SHEIN: 20% ROAS lift + 50% lower CPA (Dynamic Product Ads) · VOGACLOSET: +58% installs, +19% purchases, +12% revenue (Unified Attribution) · Mohegan Sun (gaming): +89.8% ROAS, −77% CPI (Unified Attribution) · Smart Campaign Solutions: 8.8% conversion lift in Snap's own reporting.</div>
+
+    <div class="cs-group">🎯 Measurement product map</div>
+    <div class="cs-note">North star / guardrails per product — the pattern to reuse for any Snap product question.</div>
+    <div class="ptable-wrap">
+      <table class="ptable">
+        <thead><tr><th>Product</th><th>North star</th><th>Guardrails</th><th>Considerations</th></tr></thead>
+        <tbody>
+          <tr><td class="prod">🤖 Smart Campaign Solutions</td><td class="ns">Conversion volume / lift at target CPA</td><td>Delivery cost vs. manual · overfitting to short-term signal</td><td>Automated bidding can behave like an adaptive/bandit system — don't run a fixed-design lift test with it uncontrolled, or you reintroduce the mid-flight-reallocation confound.</td></tr>
+          <tr><td class="prod">🎯 Conversion Lift</td><td class="ns">Incremental conversions / incremental ROAS</td><td>Test power (MDE) · budget/auction parity via ghost ads</td><td>Needs meaningful spend to be powered — small/mid advertisers may not qualify; that's exactly where MMM-style pooled learnings fill the gap.</td></tr>
+          <tr><td class="prod">🛒 Dynamic Product Ads</td><td class="ns">ROAS · CPA</td><td>Catalog freshness · feed errors</td><td>E-commerce workhorse; pair with a Conversion Lift or add-on test to prove the catalog optimisation itself is incremental, not just well-targeted.</td></tr>
+          <tr><td class="prod">📡 Unified Attribution</td><td class="ns">Cross-channel attributed conversions</td><td>Attribution model choice (last-click vs. data-driven) · privacy/tracking degradation</td><td>Correlational, not causal — pair with Conversion Lift when the advertiser needs a causal claim, not just a path-to-conversion view.</td></tr>
+          <tr><td class="prod">✨ AR Lens / Sponsored Snappables</td><td class="ns">Reach · engagement rate · brand lift</td><td>Completion/play rate · sentiment</td><td>Usually the "add-on format" in an add-on test — the natural example when asked to design one live.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cs-group">🇨🇳 China vertical archetypes</div>
+    <div class="cs-note">Gaming and e-commerce are the two verticals named in the JD — know the differing objective functions.</div>
+    <div class="ptable-wrap">
+      <table class="ptable">
+        <thead><tr><th>Vertical</th><th>Primary objective</th><th>Guardrails</th><th>The one thing to say</th></tr></thead>
+        <tbody>
+          <tr><td class="prod">🎮 Gaming (UA)</td><td class="ns">Installs → D7/D30 retention-adjusted LTV</td><td>Install fraud · low-quality/bot installs · CPI vs. LTV tradeoff</td><td>Raw install volume is a vanity metric — always pull the objective back to retention-adjusted value, not just CPI.</td></tr>
+          <tr><td class="prod">🛍️ E-commerce</td><td class="ns">ROAS · incremental revenue</td><td>Return/refund rate · catalog data quality</td><td>Purchase-value skew (a few big-basket orders) means CLT/power reasoning matters — decompose into conversion rate × AOV before jumping to a driver analysis.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="footer-hint">Name the vertical and the product first — it tells you the right north star and which confound to watch for.</div>
+  </div>
+
+  <div id="glossaryView">
+    <div class="cs-note">Working phrase list for internal prep and explaining concepts, not verified against Snap's official China localisation — in a client or interview conversation, say Snap's product names in English (Snap Pixel, Conversion Lift, Dynamic Product Ads…) and use these for explaining concepts in Mandarin around them.</div>
+
+    <div class="cs-group">📐 Measurement &amp; experimentation</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">Incrementality</td><td><strong>增量效果</strong> <span class="hint">zēngliàng xiàoguǒ</span><br><span class="hint">"We want to measure the incrementality of this campaign." — 我们想衡量这个广告活动的增量效果。(Wǒmen xiǎng héngliàng zhège guǎnggào huódòng de zēngliàng xiàoguǒ.)</span></td></tr>
+        <tr><td class="term">Lift test</td><td><strong>增量提升测试</strong> <span class="hint">zēngliàng tíshēng cèshì</span><br><span class="hint">"Let's run a lift test before we scale the budget." — 我们先做一个增量提升测试,再扩大预算。(Wǒmen xiān zuò yí gè zēngliàng tíshēng cèshì, zài kuòdà yùsuàn.)</span></td></tr>
+        <tr><td class="term">Control group / holdout</td><td><strong>对照组</strong> <span class="hint">duìzhào zǔ</span><br><span class="hint">"The control group didn't see any ads during the test." — 对照组在测试期间没有看到任何广告。(Duìzhào zǔ zài cèshì qījiān méiyǒu kàndào rènhé guǎnggào.)</span></td></tr>
+        <tr><td class="term">Treatment group</td><td><strong>实验组</strong> <span class="hint">shíyàn zǔ</span><br><span class="hint">"The treatment group saw the new ad format." — 实验组看到了新的广告形式。(Shíyàn zǔ kàndào le xīn de guǎnggào xíngshì.)</span></td></tr>
+        <tr><td class="term">Conversion / conversion rate</td><td><strong>转化 / 转化率</strong> <span class="hint">zhuǎnhuà / zhuǎnhuàlǜ</span><br><span class="hint">"Our conversion rate improved by 12% this month." — 我们这个月的转化率提升了百分之十二。(Wǒmen zhège yuè de zhuǎnhuàlǜ tíshēng le bǎifēnzhī shí'èr.)</span></td></tr>
+        <tr><td class="term">Attribution</td><td><strong>归因</strong> <span class="hint">guīyīn</span><br><span class="hint">"Which channel gets attribution for this sale?" — 这笔销售的归因是哪个渠道?(Zhè bǐ xiāoshòu de guīyīn shì nǎge qúdào?)</span></td></tr>
+        <tr><td class="term">Causal inference</td><td><strong>因果推断</strong> <span class="hint">yīnguǒ tuīduàn</span><br><span class="hint">"We used causal inference to rule out other explanations." — 我们用因果推断排除了其他解释。(Wǒmen yòng yīnguǒ tuīduàn páichúle qítā jiěshì.)</span></td></tr>
+        <tr><td class="term">Statistical significance</td><td><strong>统计显著性</strong> <span class="hint">tǒngjì xiǎnzhùxìng</span><br><span class="hint">"The result did not reach statistical significance." — 这个结果没有达到统计显著性。(Zhège jiéguǒ méiyǒu dádào tǒngjì xiǎnzhùxìng.)</span></td></tr>
+        <tr><td class="term">Confidence interval</td><td><strong>置信区间</strong> <span class="hint">zhìxìn qūjiān</span><br><span class="hint">"The confidence interval doesn't include zero." — 置信区间不包含零。(Zhìxìn qūjiān bù bāohán líng.)</span></td></tr>
+        <tr><td class="term">A/B test / experiment</td><td><strong>A/B 测试 / 实验</strong> <span class="hint">A/B cèshì / shíyàn</span><br><span class="hint">"We're running an A/B test on the new creative." — 我们正在对新的广告素材做A/B测试。(Wǒmen zhèngzài duì xīn de guǎnggào sùcái zuò A/B cèshì.)</span></td></tr>
+        <tr><td class="term">Media mix modeling (MMM)</td><td><strong>营销组合模型</strong> <span class="hint">yíngxiāo zǔhé móxíng</span><br><span class="hint">"The MMM shows diminishing returns on this channel." — 营销组合模型显示这个渠道的回报正在递减。(Yíngxiāo zǔhé móxíng xiǎnshì zhège qúdào de huíbào zhèngzài dìjiǎn.)</span></td></tr>
+        <tr><td class="term">Driver analysis</td><td><strong>驱动因素分析</strong> <span class="hint">qūdòng yīnsù fēnxī</span><br><span class="hint">"We did a driver analysis to find what's moving ROAS." — 我们做了驱动因素分析,找出影响ROAS的因素。(Wǒmen zuòle qūdòng yīnsù fēnxī, zhǎochū yǐngxiǎng ROAS de yīnsù.)</span></td></tr>
+      </table>
+    </div>
+
+    <div class="cs-group">💰 Metrics &amp; KPIs</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">ROAS (return on ad spend)</td><td><strong>广告支出回报率</strong> <span class="hint">guǎnggào zhīchū huíbàolǜ</span><br><span class="hint">"Our ROAS improved after switching to Dynamic Product Ads." — 换成动态商品广告后,我们的广告支出回报率提高了。(Huànchéng dòngtài shāngpǐn guǎnggào hòu, wǒmen de guǎnggào zhīchū huíbàolǜ tígāo le.)</span></td></tr>
+        <tr><td class="term">ROI</td><td><strong>投资回报率</strong> <span class="hint">tóuzī huíbàolǜ</span><br><span class="hint">"The client wants to see a clear ROI before scaling." — 客户想在扩大投放前看到清晰的投资回报率。(Kèhù xiǎng zài kuòdà tóufàng qián kàndào qīngxī de tóuzī huíbàolǜ.)</span></td></tr>
+        <tr><td class="term">CPA (cost per acquisition)</td><td><strong>获客成本</strong> <span class="hint">huòkè chéngběn</span><br><span class="hint">"Our CPA dropped by 20% this quarter." — 我们这个季度的获客成本下降了百分之二十。(Wǒmen zhège jìdù de huòkè chéngběn xiàjiàng le bǎifēnzhī èrshí.)</span></td></tr>
+        <tr><td class="term">CAC (customer acquisition cost)</td><td><strong>客户获取成本</strong> <span class="hint">kèhù huòqǔ chéngběn</span><br><span class="hint">"CAC is rising faster than LTV." — 客户获取成本的增长速度快于用户生命周期价值。(Kèhù huòqǔ chéngběn de zēngzhǎng sùdù kuàiyú yònghù shēngmìng zhōuqī jiàzhí.)</span></td></tr>
+        <tr><td class="term">CPM</td><td><strong>千次展示成本</strong> <span class="hint">qiāncì zhǎnshì chéngběn</span><br><span class="hint">"CPMs are higher during the holiday season." — 假期期间千次展示成本更高。(Jiàqī qījiān qiāncì zhǎnshì chéngběn gèng gāo.)</span></td></tr>
+        <tr><td class="term">CTR (click-through rate)</td><td><strong>点击率</strong> <span class="hint">diǎnjīlǜ</span><br><span class="hint">"The new creative has a much higher CTR." — 新的广告素材点击率高很多。(Xīn de guǎnggào sùcái diǎnjīlǜ gāo hěn duō.)</span></td></tr>
+        <tr><td class="term">LTV (lifetime value)</td><td><strong>用户生命周期价值</strong> <span class="hint">yònghù shēngmìng zhōuqī jiàzhí</span><br><span class="hint">"We should optimise for LTV, not just installs." — 我们应该优化用户生命周期价值,而不只是安装量。(Wǒmen yīnggāi yōuhuà yònghù shēngmìng zhōuqī jiàzhí, ér bùzhǐ shì ānzhuāng liàng.)</span></td></tr>
+        <tr><td class="term">Retention rate</td><td><strong>留存率</strong> <span class="hint">liúcúnlǜ</span><br><span class="hint">"Retention rate is the real success metric for gaming." — 留存率才是游戏行业真正的成功指标。(Liúcúnlǜ cái shì yóuxì hángyè zhēnzhèng de chénggōng zhǐbiāo.)</span></td></tr>
+        <tr><td class="term">KPI (key performance indicator)</td><td><strong>关键绩效指标</strong> <span class="hint">guānjiàn jìxiào zhǐbiāo</span><br><span class="hint">"Let's align on the KPI before we start." — 我们开始之前先对齐关键绩效指标。(Wǒmen kāishǐ zhīqián xiān duìqí guānjiàn jìxiào zhǐbiāo.)</span></td></tr>
+      </table>
+    </div>
+
+    <div class="cs-group">🎯 Targeting &amp; delivery</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">Target audience</td><td><strong>目标受众</strong> <span class="hint">mùbiāo shòuzhòng</span><br><span class="hint">"Who is the target audience for this campaign?" — 这个广告活动的目标受众是谁?(Zhège guǎnggào huódòng de mùbiāo shòuzhòng shì shéi?)</span></td></tr>
+        <tr><td class="term">Lookalike audience</td><td><strong>相似受众</strong> <span class="hint">xiāngsì shòuzhòng</span><br><span class="hint">"We built a lookalike audience based on existing buyers." — 我们根据现有买家建立了相似受众。(Wǒmen gēnjù xiànyǒu mǎijiā jiànlìle xiāngsì shòuzhòng.)</span></td></tr>
+        <tr><td class="term">Retargeting</td><td><strong>再营销 / 重定向</strong> <span class="hint">zài yíngxiāo / chóng dìngxiàng</span><br><span class="hint">"Retargeting usually has a higher conversion rate." — 再营销通常有更高的转化率。(Zài yíngxiāo tōngcháng yǒu gèng gāo de zhuǎnhuàlǜ.)</span></td></tr>
+        <tr><td class="term">Auction</td><td><strong>竞价</strong> <span class="hint">jìngjià</span><br><span class="hint">"Bids are competing in a real-time auction." — 出价是在实时竞价中相互竞争的。(Chūjià shì zài shíshí jìngjià zhōng xiānghù jìngzhēng de.)</span></td></tr>
+        <tr><td class="term">Bid</td><td><strong>出价</strong> <span class="hint">chūjià</span><br><span class="hint">"We raised the bid to win more impressions." — 我们提高了出价,以获得更多曝光。(Wǒmen tígāole chūjià, yǐ huòdé gèng duō bàoguāng.)</span></td></tr>
+        <tr><td class="term">Impression</td><td><strong>曝光 / 展示</strong> <span class="hint">bàoguāng / zhǎnshì</span><br><span class="hint">"The campaign delivered ten million impressions." — 这个广告活动带来了一千万次曝光。(Zhège guǎnggào huódòng dàiláile yìqiān wàn cì bàoguāng.)</span></td></tr>
+        <tr><td class="term">Budget pacing</td><td><strong>预算投放节奏</strong> <span class="hint">yùsuàn tóufàng jiézòu</span><br><span class="hint">"Budget pacing was too fast in the first week." — 第一周的预算投放节奏太快了。(Dì yī zhōu de yùsuàn tóufàng jiézòu tài kuài le.)</span></td></tr>
+        <tr><td class="term">Budget allocation</td><td><strong>预算分配</strong> <span class="hint">yùsuàn fēnpèi</span><br><span class="hint">"How should we adjust budget allocation across channels?" — 我们应该如何调整各渠道的预算分配?(Wǒmen yīnggāi rúhé tiáozhěng gè qúdào de yùsuàn fēnpèi?)</span></td></tr>
+      </table>
+    </div>
+
+    <div class="cs-group">💼 Business &amp; client phrases</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">Brand awareness</td><td><strong>品牌知名度</strong> <span class="hint">pǐnpái zhīmíngdù</span><br><span class="hint">"This campaign's main goal is brand awareness." — 这个广告活动的主要目标是提升品牌知名度。(Zhège guǎnggào huódòng de zhǔyào mùbiāo shì tíshēng pǐnpái zhīmíngdù.)</span></td></tr>
+        <tr><td class="term">Incremental sales / revenue</td><td><strong>增量销售 / 增量收入</strong> <span class="hint">zēngliàng xiāoshòu / zēngliàng shōurù</span><br><span class="hint">"We proved the campaign drove incremental sales." — 我们证明了这个广告活动带来了增量销售。(Wǒmen zhèngmíngle zhège guǎnggào huódòng dàiláile zēngliàng xiāoshòu.)</span></td></tr>
+        <tr><td class="term">Data-driven decision</td><td><strong>数据驱动决策</strong> <span class="hint">shùjù qūdòng juécè</span><br><span class="hint">"We want every budget decision to be data-driven." — 我们希望每一个预算决策都是数据驱动的。(Wǒmen xīwàng měi yí gè yùsuàn juécè dōu shì shùjù qūdòng de.)</span></td></tr>
+        <tr><td class="term">Stakeholder alignment</td><td><strong>利益相关方对齐</strong> <span class="hint">lìyì xiāngguānfāng duìqí</span><br><span class="hint">"We need stakeholder alignment before launch." — 上线前,我们需要让各利益相关方对齐。(Shàngxiàn qián, wǒmen xūyào ràng gè lìyì xiāngguānfāng duìqí.)</span></td></tr>
+        <tr><td class="term">Pilot test</td><td><strong>试点测试</strong> <span class="hint">shìdiǎn cèshì</span><br><span class="hint">"Let's run a pilot test with one advertiser first." — 我们先和一个广告主做一个试点测试。(Wǒmen xiān hé yí gè guǎnggào zhǔ zuò yí gè shìdiǎn cèshì.)</span></td></tr>
+        <tr><td class="term">Scale up</td><td><strong>规模化 / 扩大规模</strong> <span class="hint">guīmóhuà / kuòdà guīmó</span><br><span class="hint">"If the pilot works, we'll scale up across the region." — 如果试点成功,我们将在整个区域扩大规模。(Rúguǒ shìdiǎn chénggōng, wǒmen jiāng zài zhěnggè qūyù kuòdà guīmó.)</span></td></tr>
+        <tr><td class="term">Drive scaled adoption</td><td><strong>推动规模化采用</strong> <span class="hint">tuīdòng guīmóhuà cǎiyòng</span><br><span class="hint">"My job is to drive scaled adoption of this measurement framework." — 我的工作是推动这个测量框架的规模化采用。(Wǒ de gōngzuò shì tuīdòng zhège cèliáng kuàngjià de guīmóhuà cǎiyòng.)</span></td></tr>
+        <tr><td class="term">Case study</td><td><strong>案例研究</strong> <span class="hint">ànlì yánjiū</span><br><span class="hint">"Let me walk you through a relevant case study." — 让我为您介绍一个相关的案例研究。(Ràng wǒ wèi nín jièshào yí gè xiāngguān de ànlì yánjiū.)</span></td></tr>
+        <tr><td class="term">Go-to-market strategy</td><td><strong>市场进入策略</strong> <span class="hint">shìchǎng jìnrù cèlüè</span><br><span class="hint">"We need a clear go-to-market strategy for this product." — 我们需要为这个产品制定清晰的市场进入策略。(Wǒmen xūyào wèi zhège chǎnpǐn zhìdìng qīngxī de shìchǎng jìnrù cèlüè.)</span></td></tr>
+        <tr><td class="term">Cross-functional collaboration</td><td><strong>跨部门协作</strong> <span class="hint">kuà bùmén xiézuò</span><br><span class="hint">"This role requires strong cross-functional collaboration." — 这个职位需要很强的跨部门协作能力。(Zhège zhíwèi xūyào hěn qiáng de kuà bùmén xiézuò nénglì.)</span></td></tr>
+      </table>
+    </div>
+
+    <div class="cs-group">📊 Phrasing % gains &amp; numbers</div>
+    <div class="probe"><strong>Two traps in this section →</strong> <strong>percentage points vs. percent</strong> — a move from 10% to 12% is "增长了2个百分点" (up 2 percentage points), NOT "增长了百分之二十" (up 20%, which is the relative change) — mixing these is the single most common stats-communication error, in English or Mandarin. And the <strong>"倍" counting convention</strong> — "增长了一倍" means increased <em>by</em> 100% (result = 2× original), not "increased to 1×." Say "是原来的三倍" (is 3× the original) when you mean the new total, and "增长了两倍" (increased by 2×, i.e. +200%) when you mean the change — they are not interchangeable. Also note: <strong>百分之 always comes before the number</strong> in Mandarin ("百分之十二" = twelve percent) — the reverse order of English "12%."</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">Increased by X%</td><td><strong>增长了百分之 X / 提升了百分之 X</strong> <span class="hint">zēngzhǎng le bǎifēnzhī X / tíshēng le bǎifēnzhī X</span><br><span class="hint">"Revenue increased by 20% this quarter." — 这个季度收入增长了百分之二十。(Zhège jìdù shōurù zēngzhǎng le bǎifēnzhī èrshí.)</span></td></tr>
+        <tr><td class="term">Decreased by X%</td><td><strong>下降了百分之 X / 降低了百分之 X</strong> <span class="hint">xiàjiàng le bǎifēnzhī X / jiàngdī le bǎifēnzhī X</span><br><span class="hint">"CPA decreased by 15%." — 获客成本下降了百分之十五。(Huòkè chéngběn xiàjiàng le bǎifēnzhī shíwǔ.)</span></td></tr>
+        <tr><td class="term">An X% lift / uplift</td><td><strong>百分之 X 的提升 / 百分之 X 的增量</strong> <span class="hint">bǎifēnzhī X de tíshēng / bǎifēnzhī X de zēngliàng</span><br><span class="hint">"The test showed a 12% lift in conversions." — 测试显示转化率有百分之十二的提升。(Cèshì xiǎnshì zhuǎnhuàlǜ yǒu bǎifēnzhī shí'èr de tíshēng.)</span></td></tr>
+        <tr><td class="term">Percentage point (pp) vs. percent</td><td><strong>百分点 vs. 百分比</strong> <span class="hint">bǎifēndiǎn vs. bǎifēnbǐ</span><br><span class="hint">"The conversion rate rose 2 percentage points, from 10% to 12%." — 转化率提升了2个百分点,从百分之十上升到百分之十二。(Zhuǎnhuàlǜ tíshēng le liǎng gè bǎifēndiǎn, cóng bǎifēnzhī shí shàngshēng dào bǎifēnzhī shí'èr.)</span></td></tr>
+        <tr><td class="term">Doubled (increased by 100%)</td><td><strong>增长了一倍 / 翻了一倍</strong> <span class="hint">zēngzhǎng le yí bèi / fān le yí bèi</span><br><span class="hint">"Installs doubled after the format change." — 换了广告形式后,安装量增长了一倍。(Huànle guǎnggào xíngshì hòu, ānzhuāng liàng zēngzhǎng le yí bèi.)</span></td></tr>
+        <tr><td class="term">Is 3× the original (new total)</td><td><strong>是原来的三倍</strong> <span class="hint">shì yuánlái de sān bèi</span><br><span class="hint">"Revenue is now three times what it was last year." — 现在的收入是去年的三倍。(Xiànzài de shōurù shì qùnián de sān bèi.)</span></td></tr>
+        <tr><td class="term">Year-over-year (YoY)</td><td><strong>同比</strong> <span class="hint">tóngbǐ</span><br><span class="hint">"ROAS is up 30% year-over-year." — ROAS同比增长了百分之三十。(ROAS tóngbǐ zēngzhǎng le bǎifēnzhī sānshí.)</span></td></tr>
+        <tr><td class="term">Month-over-month (MoM)</td><td><strong>环比</strong> <span class="hint">huánbǐ</span><br><span class="hint">"Spend is flat month-over-month." — 支出环比持平。(Zhīchū huánbǐ chípíng.)</span></td></tr>
+        <tr><td class="term">Compared to (baseline)</td><td><strong>与...相比</strong> <span class="hint">yǔ...xiāngbǐ</span><br><span class="hint">"Compared to the control group, treatment converted 8% more." — 与对照组相比,实验组的转化率高出百分之八。(Yǔ duìzhào zǔ xiāngbǐ, shíyàn zǔ de zhuǎnhuàlǜ gāochū bǎifēnzhī bā.)</span></td></tr>
+        <tr><td class="term">From X to Y</td><td><strong>从 X 到 Y</strong> <span class="hint">cóng X dào Y</span><br><span class="hint">"CTR went from 1.2% to 1.8%." — 点击率从百分之一点二上升到百分之一点八。(Diǎnjīlǜ cóng bǎifēnzhī yī diǎn èr shàngshēng dào bǎifēnzhī yī diǎn bā.)</span></td></tr>
+        <tr><td class="term">Roughly / approximately X%</td><td><strong>大约百分之 X / 大概百分之 X</strong> <span class="hint">dàyuē bǎifēnzhī X / dàgài bǎifēnzhī X</span><br><span class="hint">"The lift was roughly 10%." — 提升幅度大约是百分之十。(Tíshēng fúdù dàyuē shì bǎifēnzhī shí.)</span></td></tr>
+        <tr><td class="term">More than / over X%</td><td><strong>超过百分之 X</strong> <span class="hint">chāoguò bǎifēnzhī X</span><br><span class="hint">"ROAS improved by more than 25%." — ROAS提升了超过百分之二十五。(ROAS tíshēng le chāoguò bǎifēnzhī èrshíwǔ.)</span></td></tr>
+        <tr><td class="term">Nearly / almost X%</td><td><strong>接近百分之 X</strong> <span class="hint">jiējìn bǎifēnzhī X</span><br><span class="hint">"We're nearly at a 90% confidence level." — 我们接近百分之九十的置信水平。(Wǒmen jiējìn bǎifēnzhī jiǔshí de zhìxìn shuǐpíng.)</span></td></tr>
+        <tr><td class="term">Statistically significant increase</td><td><strong>具有统计显著性的增长</strong> <span class="hint">jùyǒu tǒngjì xiǎnzhùxìng de zēngzhǎng</span><br><span class="hint">"This is a statistically significant increase, not noise." — 这是一个具有统计显著性的增长,不是噪音。(Zhè shì yí gè jùyǒu tǒngjì xiǎnzhùxìng de zēngzhǎng, bùshì zàoyīn.)</span></td></tr>
+      </table>
+    </div>
+
+    <div class="cs-group">🗣️ Full-sentence phrases</div>
+    <div class="cs-section">
+      <table class="cs">
+        <tr><td class="term">"Let me clarify the objective first."</td><td><strong>我先明确一下目标。</strong> <span class="hint">Wǒ xiān míngquè yīxià mùbiāo.</span></td></tr>
+        <tr><td class="term">"The results show a statistically significant lift."</td><td><strong>结果显示有统计显著的提升。</strong> <span class="hint">Jiéguǒ xiǎnshì yǒu tǒngjì xiǎnzhù de tíshēng.</span></td></tr>
+        <tr><td class="term">"I'd recommend we scale this test."</td><td><strong>我建议我们扩大这个测试的规模。</strong> <span class="hint">Wǒ jiànyì wǒmen kuòdà zhège cèshì de guīmó.</span></td></tr>
+        <tr><td class="term">"We need to control for confounding factors."</td><td><strong>我们需要控制混杂因素。</strong> <span class="hint">Wǒmen xūyào kòngzhì hùnzá yīnsù.</span></td></tr>
+        <tr><td class="term">"I have experience in ads measurement."</td><td><strong>我在广告效果测量方面有经验。</strong> <span class="hint">Wǒ zài guǎnggào xiàoguǒ cèliáng fāngmiàn yǒu jīngyàn.</span></td></tr>
+        <tr><td class="term">"Thank you for the opportunity."</td><td><strong>谢谢您给我这个机会。</strong> <span class="hint">Xièxiè nín gěi wǒ zhège jīhuì.</span></td></tr>
+      </table>
+    </div>
+    <div class="footer-hint">Working glossary · confirm any client-facing translation with a native-speaking colleague before it goes in a deck</div>
+  </div>
+
+  <div id="flashcardView">
+  <div class="controls" id="clusterFilters"></div>
+  <div class="controls">
+    <button class="btn" id="shuffleBtn">🔀 Shuffle</button>
+    <button class="btn" id="orderBtn">↩︎ Original order</button>
+    <button class="chip" id="reviewFilter">★ Review only</button>
+  </div>
+
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+  <div class="meta">
+    <span id="counter">—</span>
+    <span id="markedCount"></span>
+  </div>
+
+  <div id="cardHost"></div>
+
+  <div class="footer-hint">
+    <span class="kbd">Space</span> reveal · <span class="kbd">←</span>/<span class="kbd">→</span> prev/next · <span class="kbd">M</span> mark for review
+  </div>
+  </div><!-- /flashcardView -->
+</div>
+
+<script>
+const CARDS = [
+  { cluster: "🧪 Experimentation & Causal", q: "Holdout test vs. add-on test — how does the control group differ, and when do you use each?",
+    a: "<p><strong>Holdout test</strong>: control is suppressed from the campaign entirely (via ghost/PSA ads) — answers \"does advertising drive any incremental effect at all.\" <strong>Add-on test</strong>: control gets BAU only, treatment gets BAU + the new format/feature — answers \"is this specific add-on worth its incremental spend.\"</p>",
+    trap: "Don't call the add-on control group \"BAU\" and the holdout control group the same thing in the same breath — the confound you protect against is different in each." },
+
+  { cluster: "🧪 Experimentation & Causal", q: "Why do platforms use ghost / PSA ads instead of simply not serving control users anything?",
+    a: "<p>Two confounds, not one. <strong>Attention parity</strong> — if control sees nothing in that ad slot, any outcome difference could be attention/exposure, not ad content. <strong>Budget/auction parity</strong> — if control's budget goes unspent, that changes auction dynamics (CPMs, delivery mix) for treatment too. Ghost ads fix both: control still spends, still competes in the auction, just sees a neutral placeholder.</p>",
+    trap: "If you only mention attention parity, you've given half the answer — the auction/marketplace-interference angle is the deeper, more senior point." },
+
+  { cluster: "🧪 Experimentation & Causal", q: "You're testing whether a new AR Lens format adds value on top of an existing Dynamic Product Ads campaign. What's the budget confound, and how do you handle it?",
+    a: "<p>The risk is <strong>internal budget cannibalization</strong> — if the AR Lens spend is carved out of the existing campaign's budget pool rather than genuinely incremental, treatment's BAU delivery weakens relative to control, confounding whether any lift is from the add-on or just a different internal mix. Fix: fund the add-on with truly incremental budget layered on top of an unchanged BAU budget, and check whether its impressions are additive reach or cannibalising BAU impressions on the same users.</p>",
+    trap: "Don't just say \"treatment spent more, that's expected\" and stop — the expected asymmetry is total spend; the unexpected one is where that spend came from." },
+
+  { cluster: "🧪 Experimentation & Causal", q: "How do you evaluate an add-on format test given treatment has higher total spend than control?",
+    a: "<p>Don't compare raw outcomes — treatment will look better trivially since it got more spend. Report <strong>incremental ROAS</strong>: (treatment outcome − control outcome) ÷ (incremental spend on the add-on). That answers whether the marginal dollar on the new format was worth it.</p>",
+    trap: null },
+
+  { cluster: "🧪 Experimentation & Causal", q: "Can you dynamically shift budget toward whichever test arm looks better while the test is running?",
+    a: "<p>No. That breaks randomisation — you're no longer estimating a valid causal effect, you're running an adaptive/bandit optimisation. Budget, targeting, and bid strategy should be frozen identically across arms for the test's duration; reallocation is the decision you make <em>after</em> the read-out, using its result.</p>",
+    trap: "Watch for smart/auto-bidding doing this silently — if the algorithm can \"see\" conversions only in treatment (control is held out), it will self-select delivery toward easy converters and inflate your lift estimate." },
+
+  { cluster: "🧪 Experimentation & Causal", q: "User-level vs. geo-level randomisation for a lift test — when do you use each?",
+    a: "<p><strong>User-level</strong> (hashed device/user ID) is the default when the platform can control per-user ad delivery — most platform-run Conversion Lift tests. <strong>Geo-level</strong> when you can't isolate at the user level: testing a wholly new channel, offline/halo effects, or when a treated user could influence a control user (social/viral spillover, i.e. SUTVA violation).</p>",
+    trap: null },
+
+  { cluster: "🧪 Experimentation & Causal", q: "A rare-harm guardrail metric comes back flat while your core mechanism moved a lot. How do you interpret that?",
+    a: "<p>Don't read flat as a confirmed null. Ask: is this a <strong>true null</strong>, or is the metric <strong>underpowered</strong> for a rare event? Check the CI/MDE before concluding \"no harm.\" If underpowered, ship on the clean operational win but frame the harm claim as \"not yet proven,\" not \"proven safe.\"</p>",
+    trap: null },
+
+  { cluster: "🧪 Experimentation & Causal", q: "Advertiser's ROAS dropped 20% — walk through your diagnosis.",
+    a: "<p><strong>Clarify</strong>: what changed, what's the objective metric, what window. <strong>Hypothesise</strong>: auction-side (bid/budget/CPM shifts), product-side (creative fatigue, audience saturation), external (seasonality, competitor, platform/privacy change). <strong>Investigate</strong>: decompose impressions × CTR × CVR × AOV, segment by placement/audience/creative via SQL. <strong>Recommend</strong>: prioritised next steps with expected impact, validated via a test rather than assumed from correlation.</p>",
+    trap: "Don't skip \"real vs. artifact\" — check for a logging/tracking change (e.g. iOS ATT shift, pixel firing issue) before hypothesising a real performance cause." },
+
+  { cluster: "📈 Measurement (MMM / Lift / Attribution)", q: "MMM vs. Conversion Lift — what's the core tradeoff?",
+    a: "<p><strong>MMM</strong>: aggregate, regression-based on spend-by-channel over time, privacy-resilient (no user tracking needed), but lagged and needs enough spend variation to identify channel effects. <strong>Conversion Lift</strong>: user/geo-level randomised holdout, causal and granular for one specific campaign in near real time, but needs meaningful inventory/spend to be powered and doesn't automatically generalise.</p>",
+    trap: "A mature program uses both — MMM for cross-channel allocation, lift tests to calibrate/validate the MMM's channel elasticities — not \"pick one.\"" },
+
+  { cluster: "📈 Measurement (MMM / Lift / Attribution)", q: "What are adstock and saturation in an MMM, in plain terms?",
+    a: "<p><strong>Adstock</strong>: an impression's effect carries over and decays across following days/weeks rather than hitting instantly. <strong>Saturation</strong>: diminishing returns as spend in one channel rises — each extra dollar buys less incremental outcome than the last.</p>",
+    trap: null },
+
+  { cluster: "📈 Measurement (MMM / Lift / Attribution)", q: "Why does an MMM's channel coefficient sometimes come out unstable or wrong-signed?",
+    a: "<p>Usually <strong>multicollinearity</strong> — channels whose budgets move together over time (e.g. always scaling paid social and paid search in lockstep) give the model little independent variation to attribute effect to either one separately.</p>",
+    trap: null },
+
+  { cluster: "📈 Measurement (MMM / Lift / Attribution)", q: "How would you build a multi-study meta-analysis pooling lift-test results across many China advertisers?",
+    a: "<p>Pool effect sizes across advertiser-level lift tests, typically by vertical (gaming, e-commerce), using a <strong>hierarchical / mixed-effects model</strong> that weights each study by its power/precision. Check for <strong>effect heterogeneity</strong> across studies before pooling — don't assume one true effect if verticals or advertiser sizes behave differently — to build a generalised elasticity / diminishing-returns curve.</p>",
+    trap: null },
+
+  { cluster: "📈 Measurement (MMM / Lift / Attribution)", q: "Why does Multi-Touch Attribution (MTA) / Unified Attribution break down under iOS privacy changes, and what's the practical fix?",
+    a: "<p>MTA/attribution depends on user-level tracking across touchpoints; privacy restrictions (ATT, cookie deprecation) blind large chunks of that tracking, making the attributed path incomplete and biased. It's also correlational, not causal, at its core. Practical fix: lean more on <strong>Conversions API</strong> (server-side, more privacy-resilient) and pair attribution with <strong>Conversion Lift</strong> for a causal check.</p>",
+    trap: null },
+
+  { cluster: "📈 Measurement (MMM / Lift / Attribution)", q: "What's a Brand Lift survey, and how does it differ from Conversion Lift?",
+    a: "<p>Same underlying design — a randomised exposed group vs. a matched control group — but the <strong>outcome variable is different</strong>. Conversion Lift measures a logged behavioural event (purchase, install). Brand Lift measures a <strong>survey response</strong> from both groups: aided/unaided ad recall, brand awareness, favourability, message association, purchase intent. It's the causal-measurement tool for upper-funnel/awareness campaigns (e.g. AR Lens) where there's no conversion event yet to test on.</p>",
+    trap: "Don't describe Brand Lift as \"less rigorous\" than Conversion Lift — it's the same causal design, just a different (softer, perception-based) outcome. The real practical difference is that survey response rates are far lower than conversion rates, so it needs more reach/longer duration to power, and usually runs through a third-party research panel rather than pixel/SDK tracking." },
+
+  { cluster: "📈 Measurement (MMM / Lift / Attribution)", q: "An advertiser ran an AR Lens awareness campaign with no purchase event to track. How would you measure whether it worked?",
+    a: "<p>Reach for a <strong>Brand Lift survey</strong>, not Conversion Lift — since the objective is awareness/perception, not a behavioural conversion. Design it with the same exposed-vs-control logic (randomise who's eligible to be surveyed within exposed and control groups), and report uplift in the relevant perception metric (e.g. aided brand awareness or purchase intent) as the primary result, with a secondary check on any downstream behavioural signal (site visits, search lift) if available.</p>",
+    trap: null },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "Regression vs. random forest for a driver analysis — how do you choose, and what do you say to Sales?",
+    a: "<p><strong>Regression</strong> when you need interpretable, signed coefficients to build a plain-English narrative (\"+1pt CTR associates with +X ROAS\"). <strong>Random forest / GBM</strong> when you want ranked feature importance and can tolerate less interpretability, or when the relationship is non-linear / has interactions regression can't capture. Either way: top drivers are associational, not causal — flag that you'd validate with a test before recommending a change.</p>",
+    trap: "Forgetting the correlation-vs-causation caveat is the single most common miss on this question." },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "A gaming advertiser's campaign is underperforming. How do you structure the driver analysis?",
+    a: "<p>Split into two lenses before touching any model. <strong>Product-side drivers</strong> — creative/format quality, targeting/audience mix, frequency/fatigue, placement mix — answer \"what's being shown, to whom.\" <strong>Auction-side drivers</strong> — bid strategy, budget pacing, delivery/competition density, CPM trends — answer \"how it's being bought.\" They point to different fixes, so naming the split up front is the structuring move, before regression or random forest ever comes up.</p>",
+    trap: null },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "The JD says you'd \"provide inputs for hypothesis testing to the respective vertical marketing science leaders.\" What does that imply about how you frame your output?",
+    a: "<p>This role sits horizontally (China-wide, cross-vertical), while separate vertical leads (gaming, e-commerce) own deeper strategy. Your driver analysis is a <strong>feeder into their hypothesis queue</strong> — frame the output as a prioritised, evidence-backed hypothesis list for the vertical lead to test, not a unilateral decision you'd personally test end-to-end for every vertical.</p>",
+    trap: null },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "What's a \"learning agenda,\" and who is it for?",
+    a: "<p>A structured, prioritised testing roadmap for an advertiser — tests sequenced so each one builds on the last (e.g. frequency cap → creative refresh → bid strategy), rather than ad hoc one-off tests. The JD scopes this specifically to <strong>top advertisers</strong> — a different mandate from the scaled/self-serve framework that applies to the broader book. \"Programmatic\" here means systematic and repeatable, not automated/algorithmic.</p>",
+    trap: "Don't confuse this with Smart Campaign Solutions' automated bidding — \"programmatic\" in this JD line describes a methodology (a repeatable testing process), not ad-buying automation." },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "Your regression finds that higher bids associate with better campaign performance. What's the trap, and how would you check for it?",
+    a: "<p><strong>Endogeneity / reverse causality</strong> — bids often rise <em>because</em> a campaign is already performing well (the advertiser or Smart Campaign Solutions reacting to success), not the other way round. A plain regression can't tell the direction apart. To check: look for whether bid increases <em>precede</em> or <em>follow</em> the performance improvement in the time series, and to actually resolve it, reach for a randomised bid-strategy test rather than trusting the regression coefficient.</p>",
+    trap: null },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "Beyond R², what would you check before trusting a driver-analysis regression?",
+    a: "<p><strong>Residuals</strong> — plot vs. fitted values; a pattern signals heteroscedasticity or a missed non-linearity. <strong>Coefficient-level significance</strong> — each driver needs its own p-value/CI, not just overall model fit. <strong>Outliers/influential points</strong> — a few whale advertisers can dominate a small regression (check leverage/Cook's distance). <strong>Omitted variable bias</strong> — name a plausible missing confounder (seasonality, a competitor's campaign) before trusting a coefficient.</p>",
+    trap: "High R² on the fitting data says nothing about generalisation — don't cite R² alone as evidence a driver is real." },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "What's multicollinearity and why does it matter for a driver analysis?",
+    a: "<p>When predictors move together (e.g. impressions and reach), individual coefficients become unstable/hard to interpret even if the model fits well overall — you can't cleanly say which correlated variable is \"driving\" the outcome.</p>",
+    trap: null },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "Why can you still run valid z/t-tests on a heavily skewed metric like revenue/user or ROAS?",
+    a: "<p>Because inference is on the <strong>mean</strong>, not individual values — CLT makes the sampling distribution of the mean ~normal at scale even when the underlying data is skewed/zero-inflated. The real risk isn't validity, it's <strong>power</strong> (huge variance from a long tail of whales inflates the MDE) and a single whale flipping the result. Fix: cap/winsorise, decompose into rate × value-given-conversion, or CUPED on pre-period spend.</p>",
+    trap: "\"n is large\" is an argument for trusting the CLT, never an argument for z over t — at scale they're indistinguishable anyway." },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "Quick recap: p-value, confidence interval, statistical power — one line each.",
+    a: "<p><strong>p-value</strong>: P(data this extreme | null true). <strong>95% CI</strong> excluding 0 ⇔ significant at α=0.05. <strong>Power</strong> = 1−β = P(detect a real effect when one exists), driven up by more n, bigger true effect, lower variance, higher α.</p>",
+    trap: null },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "What's the danger of \"peeking\" at a live test and stopping the moment p < 0.05?",
+    a: "<p>Each additional look is another chance to cross the significance line by luck — this inflates the true false-positive rate well above your stated α (can hit 20–30%+ with repeated peeking). Fix: predefine sample size/duration and evaluate once, or use sequential testing / alpha-spending if you need to monitor live.</p>",
+    trap: null },
+
+  { cluster: "💼 Case Study & Business Framing", q: "You're handed a case: design a measurement program for a new China gaming advertiser. What's your structure?",
+    a: "<p><strong>Story</strong> → advertiser's business and where they are today. <strong>Goal</strong> → pin the objective (installs? D7-retention-adjusted LTV? revenue?) explicitly before proceeding. <strong>Solution</strong> → name the actual Snap product mix (Smart Campaign Solutions, Dynamic Product Ads, AR Lens). <strong>Measurement proof</strong> → Conversion Lift design, MDE/duration, confound handling. <strong>Results</strong> → report as % lift AND incremental ROAS. <strong>Recommendation</strong> → what to scale next and the threshold that would change it.</p>",
+    trap: "Solving the wrong objective because it wasn't confirmed up front is the most common trap in this family of question." },
+
+  { cluster: "💼 Case Study & Business Framing", q: "Why report incremental ROAS instead of just the headline lift percentage in a client-facing case?",
+    a: "<p>A lift percentage alone doesn't say whether the spend was worth it — a 50% lift on trivial spend might be a worse deal than a 15% lift on meaningful spend. Incremental ROAS (or cost-per-incremental-outcome) ties the lift back to the actual business decision the advertiser and Sales need: is the marginal dollar worth spending.</p>",
+    trap: null },
+
+  { cluster: "💼 Case Study & Business Framing", q: "How do you translate a technical causal-inference result into something a Sales partner can pitch to a skeptical advertiser?",
+    a: "<p>Lead with the business decision the result supports, not the method. State the result as incremental ROAS/outcome with a plain-English one-liner on why it's trustworthy (e.g. \"we held out a comparable group who didn't see the ad, so this is the actual lift, not just correlation\"), then the recommendation. Save method details (ghost ads, randomisation unit) for if probed.</p>",
+    trap: null },
+
+  { cluster: "🇨🇳 China & Sales Partnership", q: "The JD says \"drive scaled adoption of measurement practices\" — what does that actually mean you'd build?",
+    a: "<p>A repeatable, self-serve learning-agenda/testing framework that Sales and advertisers can run across the whole China book — not a bespoke deep-dive analysis per advertiser. Measurement credibility at scale comes from fast, trustworthy, repeatable results, not one-off rigor on a handful of accounts.</p>",
+    trap: null },
+
+  { cluster: "🇨🇳 China & Sales Partnership", q: "You come from a product-DS background, not client-facing Sales pitch decks. How do you frame that gap honestly in an interview?",
+    a: "<p>Reframe rather than apologise — the transferable skill is structuring insight for a skeptical, non-technical audience, built through upward/cross-functional influence (Product, Eng, exec go/no-go), not literal Sales-deck experience. Be precise: claim what actually transfers, don't overclaim experience not held.</p>",
+    trap: null },
+
+  { cluster: "🇨🇳 China & Sales Partnership", q: "How would you speak about your Meta background without sounding like you're pitching Meta's playbook to Snap?",
+    a: "<p>Use the underlying methodology (ghost ads, incrementality mechanics, MMM tradeoffs) as evidence of depth, but translate every named product into Snap's own vocabulary — Smart Campaign Solutions instead of Advantage+, Conversion Lift instead of Meta's, Dynamic Product Ads / AR Lens instead of Partnership Ads.</p>",
+    trap: "Naming a Meta-specific product by name in a Snap answer reads as not having done the homework — this is a fast way to lose credibility with an ex-Meta HM specifically." },
+
+  { cluster: "📱 Snap Products", q: "What's Snap's equivalent of Meta's Advantage+ / Google's Performance Max?",
+    a: "<p><strong>Smart Campaign Solutions</strong> — Snap's automated/AI-driven campaign optimisation suite (Smart Ads, Smart Bidding, Smart Budget).</p>",
+    trap: null },
+
+  { cluster: "📱 Snap Products", q: "Name Snap's client-side and server-side conversion tracking tools.",
+    a: "<p><strong>Snap Pixel</strong> (client-side JavaScript) and <strong>Conversions API</strong> (server-side, more resilient to browser/privacy restrictions).</p>",
+    trap: null },
+
+  { cluster: "📱 Snap Products", q: "What's Snap's causal/incremental measurement product called?",
+    a: "<p><strong>Conversion Lift</strong> — the platform-run randomised holdout test.</p>",
+    trap: null },
+
+  { cluster: "📱 Snap Products", q: "What ad product would you recommend for a China e-commerce advertiser wanting to scale catalog-driven performance?",
+    a: "<p><strong>Dynamic Product Ads</strong> — catalog/feed-driven ads optimisable to Pixel Purchase events, often paired with Collection Ads as the creative format.</p>",
+    trap: null },
+
+  { cluster: "📱 Snap Products", q: "What's the difference between Story Ads/Collection Ads and AR Lenses/Sponsored Snappables as a lever?",
+    a: "<p>Story/Collection Ads are core direct-response and catalog-driven formats. AR Lenses / Sponsored Snappables are Snap's differentiated engagement/awareness format — typically the natural \"add-on\" layered on top of a BAU campaign when designing an add-on-format lift test.</p>",
+    trap: null },
+
+  { cluster: "📱 Snap Products", q: "What's Snap's cross-channel measurement product, and what's its key limitation?",
+    a: "<p><strong>Unified Attribution</strong> — a cross-touchpoint attribution view. Limitation: it's correlational (path-to-conversion), not causal, and degrades under privacy restrictions like iOS ATT — pair with Conversion Lift when a causal claim is needed.</p>",
+    trap: null },
+];
+
+
+// ---- state ----
+let order = CARDS.map((_, i) => i);
+let pos = 0;
+let revealed = false;
+let activeCluster = "All";
+let reviewOnly = false;
+const marked = new Set(JSON.parse(localStorage.getItem("marked_cards") || "[]"));
+
+const clusters = ["All", ...Array.from(new Set(CARDS.map(c => c.cluster)))];
+let currentView = "cheatsheet";
+
+function showView(v) {
+  currentView = v;
+  document.getElementById("cheatsheetView").style.display = v === "cheatsheet" ? "block" : "none";
+  document.getElementById("productsView").style.display = v === "products" ? "block" : "none";
+  document.getElementById("glossaryView").style.display = v === "glossary" ? "block" : "none";
+  document.getElementById("flashcardView").style.display = v === "flashcards" ? "block" : "none";
+  document.getElementById("tabCheat").classList.toggle("active", v === "cheatsheet");
+  document.getElementById("tabProducts").classList.toggle("active", v === "products");
+  document.getElementById("tabGlossary").classList.toggle("active", v === "glossary");
+  document.getElementById("tabCards").classList.toggle("active", v === "flashcards");
+}
+
+function saveMarked() { localStorage.setItem("marked_cards", JSON.stringify([...marked])); }
+
+function visibleIndices() {
+  return order.filter(i => {
+    if (activeCluster !== "All" && CARDS[i].cluster !== activeCluster) return false;
+    if (reviewOnly && !marked.has(i) && !CARDS[i].review) return false;
+    return true;
+  });
+}
+
+function renderFilters() {
+  const host = document.getElementById("clusterFilters");
+  host.innerHTML = "";
+  clusters.forEach(cl => {
+    const el = document.createElement("span");
+    el.className = "chip" + (cl === activeCluster ? " active" : "");
+    el.textContent = cl;
+    el.onclick = () => { activeCluster = cl; pos = 0; revealed = false; render(); };
+    host.appendChild(el);
+  });
+}
+
+function render() {
+  renderFilters();
+  document.getElementById("reviewFilter").classList.toggle("active", reviewOnly);
+
+  const vis = visibleIndices();
+  const host = document.getElementById("cardHost");
+  const markedCountEl = document.getElementById("markedCount");
+  markedCountEl.textContent = marked.size ? `★ ${marked.size} marked` : "";
+
+  if (vis.length === 0) {
+    host.innerHTML = '<div class="card"><div class="empty">No cards match this filter.<br>Try a different cluster or turn off “Review only.”</div></div>';
+    document.getElementById("counter").textContent = "0 / 0";
+    document.getElementById("progressFill").style.width = "0%";
+    return;
+  }
+  if (pos >= vis.length) pos = vis.length - 1;
+  if (pos < 0) pos = 0;
+
+  const idx = vis[pos];
+  const c = CARDS[idx];
+  const isMarked = marked.has(idx);
+
+  host.innerHTML = `
+    <div class="card">
+      <span class="tag">${c.cluster}</span>${c.review ? '<span class="tag" style="color:#e6b43c;background:rgba(230,180,60,.12);margin-left:6px">🆕 Review</span>' : ""}
+      <div class="q">${c.q}</div>
+      <div class="answer ${revealed ? "" : "hidden"}">
+        ${c.a}
+        ${c.trap ? `<div class="trap"><b>⚠️ Trap:</b> ${c.trap}</div>` : ""}
+      </div>
+      ${revealed ? "" : '<div class="reveal-hint">Answer it out loud, then press Space (or click Reveal).</div>'}
+      <div class="nav">
+        <button class="btn" id="prevBtn">← Prev</button>
+        <button class="star ${isMarked ? "marked" : ""}" id="starBtn" title="Mark for review (M)">${isMarked ? "★" : "☆"}</button>
+        <button class="btn primary" id="revealBtn">${revealed ? "Next →" : "Reveal"}</button>
+      </div>
+    </div>`;
+
+  if (window.renderMathInElement) renderMathInElement(host, { delimiters: [{left:'\\(',right:'\\)',display:false},{left:'\\[',right:'\\]',display:true}], throwOnError: false });
+  document.getElementById("counter").textContent = `Card ${pos + 1} / ${vis.length}`;
+  document.getElementById("progressFill").style.width = `${((pos + 1) / vis.length) * 100}%`;
+
+  document.getElementById("prevBtn").onclick = prev;
+  document.getElementById("starBtn").onclick = toggleMark;
+  document.getElementById("revealBtn").onclick = () => { revealed ? next() : reveal(); };
+}
+
+function reveal() { revealed = true; render(); }
+function next() { const vis = visibleIndices(); if (pos < vis.length - 1) pos++; else pos = 0; revealed = false; render(); }
+function prev() { const vis = visibleIndices(); if (pos > 0) pos--; else pos = vis.length - 1; revealed = false; render(); }
+function toggleMark() {
+  const vis = visibleIndices(); const idx = vis[pos];
+  if (marked.has(idx)) marked.delete(idx); else marked.add(idx);
+  saveMarked(); render();
+}
+
+document.getElementById("shuffleBtn").onclick = () => {
+  for (let i = order.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [order[i], order[j]] = [order[j], order[i]]; }
+  pos = 0; revealed = false; render();
+};
+document.getElementById("orderBtn").onclick = () => { order = CARDS.map((_, i) => i); pos = 0; revealed = false; render(); };
+document.getElementById("reviewFilter").onclick = () => { reviewOnly = !reviewOnly; pos = 0; revealed = false; render(); };
+
+document.addEventListener("keydown", (e) => {
+  if (currentView !== "flashcards") return;
+  if (e.key === " ") { e.preventDefault(); revealed ? next() : reveal(); }
+  else if (e.key === "ArrowRight") { e.preventDefault(); next(); }
+  else if (e.key === "ArrowLeft") { e.preventDefault(); prev(); }
+  else if (e.key.toLowerCase() === "m") { e.preventDefault(); toggleMark(); }
+});
+
+document.getElementById("tabCheat").onclick = () => showView("cheatsheet");
+document.getElementById("tabProducts").onclick = () => showView("products");
+document.getElementById("tabGlossary").onclick = () => showView("glossary");
+document.getElementById("tabCards").onclick = () => showView("flashcards");
+
+/* ---------- collapsible cheatsheet ---------- */
+function buildCollapsible(viewId, key) {
+  const view = document.getElementById(viewId);
+  if (!view || view.dataset.built) return;
+  view.dataset.built = "1";
+
+  const groups = [...view.querySelectorAll(":scope > .cs-group")];
+  if (!groups.length) return;
+
+  let state = {};
+  try { state = JSON.parse(localStorage.getItem(key) || "{}"); } catch (e) {}
+
+  const showNav = viewId !== "productsView";
+  const bar = document.createElement("div");
+  bar.className = "cs-toolbar";
+  bar.innerHTML =
+    '<div class="cs-searchrow">' +
+      '<input class="cs-search" type="search" placeholder="Search\u2026 (e.g. CUPED, shrinkage, SE)">' +
+      '<button class="cs-btn" data-act="expand">Expand all</button>' +
+      '<button class="cs-btn" data-act="collapse">Collapse all</button>' +
+    '</div>' +
+    (showNav ? '<div class="cs-nav"></div>' : '') +
+    '<div class="cs-hits" style="display:none"></div>';
+  view.insertBefore(bar, view.firstChild);
+  const nav = bar.querySelector(".cs-nav");
+  const hits = bar.querySelector(".cs-hits");
+
+  groups.forEach((g, i) => {
+    const wrap = document.createElement("div");
+    wrap.className = "cs-block";
+    wrap.id = key + "-blk-" + i;
+    const body = document.createElement("div");
+    body.className = "cs-body";
+    g.parentNode.insertBefore(wrap, g);
+    wrap.appendChild(g);
+    let n = wrap.nextSibling;
+    while (n && !(n.nodeType === 1 && n.classList.contains("cs-group"))) {
+      const nxt = n.nextSibling;
+      body.appendChild(n);
+      n = nxt;
+    }
+    wrap.appendChild(body);
+
+    const label = g.textContent.trim();
+    const rows = body.querySelectorAll("tr").length;
+    g.innerHTML = '<span class="lbl">' + label + '</span>' +
+                  '<span class="cnt">' + rows + '</span>' +
+                  '<span class="chev">\u25B6</span>';
+    if (state[i]) wrap.classList.add("open");
+    g.onclick = () => {
+      wrap.classList.toggle("open");
+      state[i] = wrap.classList.contains("open");
+      localStorage.setItem(key, JSON.stringify(state));
+    };
+
+    if (nav) {
+      const chip = document.createElement("button");
+      chip.className = "cs-chip";
+      chip.textContent = label;
+      chip.onclick = () => {
+        wrap.classList.add("open");
+        state[i] = true;
+        localStorage.setItem(key, JSON.stringify(state));
+        wrap.scrollIntoView({ behavior: "smooth", block: "start" });
+      };
+      nav.appendChild(chip);
+    }
+  });
+
+  const blocks = [...view.querySelectorAll(".cs-block")];
+
+  function setAll(open) {
+    blocks.forEach((b, i) => { b.classList.toggle("open", open); state[i] = open; });
+    localStorage.setItem(key, JSON.stringify(state));
+  }
+  bar.querySelector('[data-act="expand"]').onclick = () => setAll(true);
+  bar.querySelector('[data-act="collapse"]').onclick = () => setAll(false);
+
+  function clearSearch() {
+    blocks.forEach((b, i) => {
+      b.style.display = "";
+      b.classList.toggle("open", !!state[i]);
+      b.querySelectorAll("tr").forEach(tr => { tr.style.display = ""; });
+      b.querySelectorAll(".cs-section").forEach(sec => { sec.style.display = ""; });
+    });
+    hits.style.display = "none";
+  }
+
+  const input = bar.querySelector(".cs-search");
+  input.oninput = () => {
+    const q = input.value.trim().toLowerCase();
+    if (!q) { clearSearch(); return; }
+    let total = 0, shown = 0;
+    blocks.forEach(b => {
+      let n = 0;
+      b.querySelectorAll("tr").forEach(tr => {
+        if (tr.closest("thead")) { tr.style.display = ""; return; }
+        const hit = tr.textContent.toLowerCase().includes(q);
+        tr.style.display = hit ? "" : "none";
+        if (hit) n++;
+      });
+      b.querySelectorAll(".cs-section").forEach(sec => {
+        const any = [...sec.querySelectorAll("tr")]
+          .some(tr => !tr.closest("thead") && tr.style.display !== "none");
+        sec.style.display = any ? "" : "none";
+      });
+      b.style.display = n ? "" : "none";
+      b.classList.toggle("open", n > 0);
+      total += n;
+      if (n) shown++;
+    });
+    hits.style.display = "block";
+    hits.textContent = total
+      ? total + " row" + (total === 1 ? "" : "s") + " in " + shown + " section" + (shown === 1 ? "" : "s")
+      : "No matches";
+  };
+}
+
+buildCollapsible("cheatsheetView", "cs_open_cheat");
+buildCollapsible("productsView", "cs_open_products");
+buildCollapsible("glossaryView", "cs_open_glossary");
+
+const toTop = document.createElement("button");
+toTop.className = "to-top";
+toTop.textContent = "\u2191 Top";
+toTop.onclick = () => window.scrollTo({ top: 0, behavior: "smooth" });
+document.body.appendChild(toTop);
+window.addEventListener("scroll", () => {
+  toTop.classList.toggle("show", window.scrollY > 500);
+});
+
+render();
+showView("cheatsheet");
+</script>
+</body>
+</html>
