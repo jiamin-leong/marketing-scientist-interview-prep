@@ -375,6 +375,35 @@
       </table>
     </div>
 
+    <div class="cs-note">Worked example — ties the decomposition formula, the product/auction split, and the composition-effect trap together in one walkthrough.</div>
+    <div class="sayit"><b>Say this</b>"ROAS = 1000 × (CTR × CVR × AOV) ÷ CPM. A drop must come from one of those four levers, so I'd pull each side by side before hypothesising anything — that tells me immediately whether I'm looking at a product-side or auction-side story, rather than guessing."</div>
+    <div class="cs-section">
+      <h2>Worked example: ROAS drops 15% week-over-week</h2>
+      <table class="cs">
+        <tr><td class="term">1. Clarify</td><td>Confirm the window, whether it's one advertiser or many, and — critically — whether <strong>spend is fixed (budget-capped) or variable</strong> during this period. That distinction changes how a CPM move translates into a revenue move.</td></tr>
+        <tr><td class="term">2. Real vs. artifact</td><td>Rule out a broken Snap Pixel/Conversions API event, an attribution-window change, or an iOS ATT-related tracking dip before hypothesising a real performance cause.</td></tr>
+        <tr><td class="term">3. Decompose</td><td>ROAS = Revenue ÷ Spend = (Impressions × CTR × CVR × AOV) ÷ Spend. Since Spend = Impressions × CPM ÷ 1000, this simplifies to <strong>ROAS = 1000 × (CTR × CVR × AOV) ÷ CPM</strong> — four candidate levers: CPM ↑ = auction-side; CTR ↓ / CVR ↓ / AOV ↓ = product-side (CVR also needs its own real-vs-artifact check).</td></tr>
+      </table>
+      <div class="cmp-wrap">
+      <table class="cmp">
+        <tr><th></th><th>Week 1</th><th>Week 2</th></tr>
+        <tr><td>Spend (fixed budget)</td><td>$50,000</td><td>$50,000</td></tr>
+        <tr><td>CPM</td><td>$5.00</td><td>$5.90 (+18%)</td></tr>
+        <tr><td>Impressions</td><td>10,000,000</td><td>8,500,000 (−15%)</td></tr>
+        <tr><td>CTR</td><td>1.2%</td><td>1.2% (flat)</td></tr>
+        <tr><td>CVR</td><td>2.5%</td><td>2.5% (flat)</td></tr>
+        <tr><td>AOV</td><td>$50</td><td>$50 (flat)</td></tr>
+        <tr><td>Revenue</td><td>$150,000</td><td>$127,500</td></tr>
+        <tr><td><strong>ROAS</strong></td><td><strong>3.0</strong></td><td><strong>2.55 (−15%)</strong></td></tr>
+      </table>
+      </div>
+      <table class="cs">
+        <tr><td class="term">Reading it</td><td>CTR, CVR, and AOV are all flat — the entire drop is arithmetically explained by <strong>CPM rising 18%</strong>, which under a fixed budget mechanically buys 15% fewer impressions; revenue scales down proportionally since per-impression conversion behaviour didn't change. This is an <strong>auction-side story</strong> — nothing about creative, targeting, or catalog needs to have changed.</td></tr>
+        <tr><td class="term">4. Composition-effect check</td><td>Before locking that in, confirm CTR/CVR are flat <em>within</em> each audience/placement segment, not just in the blended average — the auction could be winning a different, lower-quality mix of placements at the higher CPM while blended rates coincidentally look flat. Check auction diagnostics (win rate, share of voice) if available, rather than inferring competition purely from the CPM number — a CPM rise can also be self-inflicted (Smart Campaign Solutions' own bidding behaviour, or the advertiser's own bid-strategy change).</td></tr>
+        <tr><td class="term">5. Recommend</td><td>Given confirmed rising competitive CPM: (a) raise budget to restore impression volume, if incremental ROAS at the new CPM still clears the advertiser's threshold, or (b) test an alternative bid strategy via the disjoint-audience-pool method-comparison design. Close with a threshold, not just a finding: <em>"if CPM reverts within two weeks, this was a temporary competitive spike, no action needed; if sustained, I'd propose the bid-strategy test."</em></td></tr>
+      </table>
+    </div>
+
     <div class="cs-group">💼 Case study structure &amp; client narrative — high priority</div>
     <div class="cs-note">Real Snap case studies (SHEIN, VOGACLOSET, Mohegan Sun) follow this arc — use it verbatim when handed a scenario.</div>
     <div class="sayit"><b>Say this</b>"I'd structure it as story, goal, solution, then proof — what's the advertiser's business and where are they today, what specific outcome are we optimising (not just 'more ROAS' — installs, D7-adjusted LTV, revenue), which named Snap products address that goal, how I'd prove any lift is real, and then report results as incremental ROAS with a clear next-step recommendation."</div>
@@ -693,6 +722,10 @@ const CARDS = [
   { cluster: "🎯 Driver Analysis & Stats", q: "Beyond R², what would you check before trusting a driver-analysis regression?",
     a: "<p><strong>Residuals</strong> — plot vs. fitted values; a pattern signals heteroscedasticity or a missed non-linearity. <strong>Coefficient-level significance</strong> — each driver needs its own p-value/CI, not just overall model fit. <strong>Outliers/influential points</strong> — a few whale advertisers can dominate a small regression (check leverage/Cook's distance). <strong>Omitted variable bias</strong> — name a plausible missing confounder (seasonality, a competitor's campaign) before trusting a coefficient.</p>",
     trap: "High R² on the fitting data says nothing about generalisation — don't cite R² alone as evidence a driver is real." },
+
+  { cluster: "🎯 Driver Analysis & Stats", q: "Worked example: a campaign's ROAS drops 15% week-over-week. Walk through your diagnosis.",
+    a: "<p><strong>Decompose first:</strong> ROAS = 1000 × (CTR × CVR × AOV) ÷ CPM — four candidate levers, CPM ↑ = auction-side, CTR/CVR/AOV ↓ = product-side. Pull each side by side before hypothesising.</p><p><strong>Example numbers:</strong> Spend fixed at $50,000 both weeks. CPM rises $5.00 → $5.90 (+18%), so at fixed budget Impressions fall 10M → 8.5M (−15%). CTR (1.2%), CVR (2.5%), and AOV ($50) all stay flat. Revenue falls proportionally with impressions ($150,000 → $127,500), giving the full −15% ROAS move — arithmetically explained entirely by rising CPM, an <strong>auction-side</strong> story, not product-side.</p><p><strong>Before locking that in:</strong> check CTR/CVR are flat <em>within</em> each audience/placement segment, not just blended — the auction could be winning a different, lower-quality mix at the higher CPM while the blended average coincidentally looks flat (the composition-effect trap). Check win-rate/auction diagnostics if available rather than inferring competition purely from the CPM number.</p><p><strong>Recommend:</strong> raise budget to restore volume if incremental ROAS still clears threshold, or test an alternative bid strategy via a disjoint-audience-pool method-comparison test — and close with a threshold (\"if CPM reverts in two weeks, no action; if sustained, propose the bid-strategy test\").</p>",
+    trap: "Don't stop at \"CPM rose\" — always run the composition-effect check on the segment-level CTR/CVR before concluding it's purely an auction-side story." },
 
   { cluster: "🎯 Driver Analysis & Stats", q: "What's multicollinearity and why does it matter for a driver analysis?",
     a: "<p>When predictors move together (e.g. impressions and reach), individual coefficients become unstable/hard to interpret even if the model fits well overall — you can't cleanly say which correlated variable is \"driving\" the outcome.</p>",
