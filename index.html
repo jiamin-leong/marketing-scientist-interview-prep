@@ -314,6 +314,37 @@
       </table>
     </div>
 
+    <div class="cs-section">
+      <h2>Add-on test budget structure, visualised</h2>
+      <svg viewBox="0 0 360 290" style="width:100%;max-width:400px;display:block;margin:0 auto" role="img" aria-label="Bar chart: Control budget is $50,000 BAU only. Treatment budget is $50,000 BAU plus $15,000 incremental add-on, for a total of $65,000.">
+        <!-- legend -->
+        <rect x="60" y="6" width="12" height="12" rx="2" fill="var(--panel-2)" stroke="var(--border)"></rect>
+        <text x="78" y="16" font-size="11" fill="var(--muted)">BAU budget</text>
+        <rect x="180" y="6" width="12" height="12" rx="2" fill="var(--accent-strong)"></rect>
+        <text x="198" y="16" font-size="11" fill="var(--muted)">Incremental add-on</text>
+
+        <!-- BAU reference line, so the two bars' shared baseline segment is visually obvious -->
+        <line x1="55" y1="94.3" x2="305" y2="94.3" stroke="var(--border)" stroke-width="1" stroke-dasharray="3,3"></line>
+
+        <!-- Control bar: BAU only -->
+        <rect x="55" y="94.3" width="80" height="135.7" rx="4" fill="var(--panel-2)" stroke="var(--border)"></rect>
+        <text x="95" y="86.3" font-size="13" font-weight="700" fill="var(--text)" text-anchor="middle">$50,000</text>
+        <text x="95" y="162" font-size="11" fill="var(--text)" text-anchor="middle">BAU</text>
+        <text x="95" y="248" font-size="11" fill="var(--muted)" text-anchor="middle">Control</text>
+        <text x="95" y="261" font-size="11" fill="var(--muted)" text-anchor="middle">(BAU only)</text>
+
+        <!-- Treatment bar: BAU segment, identical height to control, plus incremental segment stacked on top -->
+        <rect x="225" y="94.3" width="80" height="135.7" rx="4" fill="var(--panel-2)" stroke="var(--border)"></rect>
+        <text x="265" y="162" font-size="11" fill="var(--text)" text-anchor="middle">BAU</text>
+        <rect x="225" y="53.6" width="80" height="38.7" rx="4" fill="var(--accent-strong)"></rect>
+        <text x="265" y="76" font-size="12" font-weight="700" fill="#fff" text-anchor="middle">+$15,000</text>
+        <text x="265" y="45.6" font-size="13" font-weight="700" fill="var(--text)" text-anchor="middle">$65,000</text>
+        <text x="265" y="248" font-size="11" fill="var(--muted)" text-anchor="middle">Treatment</text>
+        <text x="265" y="261" font-size="11" fill="var(--muted)" text-anchor="middle">(BAU + Partnership Ads)</text>
+      </svg>
+      <div class="footer-hint">Illustrative dollar figures — the structural point is what matters: treatment's BAU segment matches control's bar exactly (the dashed line), and the add-on is strictly incremental on top of it, never carved from it.</div>
+    </div>
+
     <div class="cs-note">A third test pattern — neither holdout nor add-on. Both arms get real ads; the thing being tested is the <strong>delivery methodology</strong> itself.</div>
     <div class="sayit"><b>Say this</b>"Matching every setting except bid strategy controls for configuration, but it doesn't control for the auction — two of your own campaigns can still bid against each other for the same users unless you explicitly split the audience into disjoint pools first."</div>
     <div class="cs-section">
