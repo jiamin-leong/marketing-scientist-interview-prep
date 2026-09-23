@@ -435,6 +435,19 @@
       </table>
     </div>
 
+    <h2 style="font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--accent);margin:20px 4px 10px">Why choose Bayesian for lift-test meta-analysis?</h2>
+    <div class="cmp-wrap">
+      <table class="cmp">
+        <tr><th>Feature</th><th>Frequentist meta-analysis</th><th>Bayesian meta-analysis</th></tr>
+        <tr><td>Interpretation</td><td>Confidence intervals and p-values, frequently misinterpreted by business teams.</td><td>Credible intervals and direct probabilities — e.g. "95% probability the true lift is above 2%."</td></tr>
+        <tr><td>Small study counts</td><td>DL/REML's τ² estimate gets noisy with few studies, and can even floor at zero — a falsely narrow, overconfident interval.</td><td>A prior on τ² keeps the posterior honestly wide when few studies are pooled, rather than pretending false precision.</td></tr>
+        <tr><td>Shrinkage</td><td><span class="hint">Also happens here</span> — random-effects (DL/REML) shrinks noisy individual studies too, via the same precision-weighted logic; it's just rarely reported.</td><td>Same shrinkage mechanism, but surfaced naturally as part of the output (a posterior for every study), and its strength properly reflects τ²'s own uncertainty.</td></tr>
+        <tr><td>Prior knowledge</td><td>Treats every meta-analysis as starting from scratch — no formal way to fold in outside information.</td><td>Formally integrates historical benchmarks or industry priors to stabilise new/thin test results.</td></tr>
+        <tr><td>Flexibility</td><td>Nested nesting (by industry, market, campaign objective) is possible via mixed-effects models, but gets unwieldy fast.</td><td>Naturally handles multi-level hierarchical structure (tests nested by vertical, market, objective) as an extension of the same model.</td></tr>
+      </table>
+    </div>
+    <div class="probe"><strong>Correction worth having ready if the table above comes up:</strong> shrinkage itself isn't uniquely Bayesian — frequentist random-effects models shrink too. The real Bayesian edge is honestly propagating τ²'s own uncertainty, which matters most exactly when pooling a small number of studies.</div>
+
     <div class="cs-group">💼 Case study structure &amp; client narrative — high priority</div>
     <div class="cs-note">Real Snap case studies (SHEIN, VOGACLOSET, Mohegan Sun) follow this arc — use it verbatim when handed a scenario.</div>
     <div class="sayit"><b>Say this</b>"I'd structure it as story, goal, solution, then proof — what's the advertiser's business and where are they today, what specific outcome are we optimising (not just 'more ROAS' — installs, D7-adjusted LTV, revenue), which named Snap products address that goal, how I'd prove any lift is real, and then report results as incremental ROAS with a clear next-step recommendation."</div>
